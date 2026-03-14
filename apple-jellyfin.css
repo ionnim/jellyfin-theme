@@ -1,3 +1,667 @@
+
+:root {
+    --darkerGradientPoint: #111827;
+    --darkerGradientPointAlpha: rgba(17, 24, 39, 0.85);
+    --lighterGradientPoint: #1d2635;
+    --lighterGradientPointAlpha: rgba(29, 38, 53, 0.85);
+    --headerColor: rgba(30, 40, 54, 0.8);
+    --borderColor: hsl(214, 13%, 32%);
+    --lighterBorderColor: hsla(0, 0%, 100%, 0.2);
+    --selectorBackgroundColor: rgb(55, 65, 81);
+    --activeColor: rgb(119, 91, 244);
+    --btnSubmitColor: rgb(61, 54, 178);
+    --btnSubmitBorderColor: rgb(117 111 226);
+    --defaultBorder: var(--borderWidth) solid var(--borderColor);
+    --defaultLighterBorder: var(--borderWidth) solid var(--lighterBorderColor);
+    --textColor: rgb(209, 213, 219);
+    --dimTextColor: rgb(156, 163, 175);
+    --backgroundGradient: linear-gradient(0deg, var(--darkerGradientPoint) 35%, var(--lighterGradientPoint));
+    --largeRadius: 1em;
+    --smallRadius: 0.5em;
+    --smallerRadius: 0.375em;
+    --borderWidth: 0.06em;
+    --sidePadding: 3.3%;
+    --blurDefault: blur(5px);
+    --blurLargest: blur(20px);
+    --clearLogoVisibility: block;
+    --itemTitleVisibility: none;
+    --appBarHeight: 5em;
+    --backdropTrimFromTop: 10%;
+}
+
+html {
+font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 425;
+    font-style: normal;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+body {
+--primaryItemPageNegativeSpace: 14vh;
+    --secondaryItemPageNegativeSpace: 60vh;
+    --clearLogoBottomSpace: 11em;
+}
+
+.detailPageWrapperContainer {
+padding-top: unset;
+    margin-top: unset;
+}
+
+.layout-desktop .detailPageWrapperContainer {
+background: transparent;
+    min-height: 46vh;
+    background: linear-gradient(180deg, transparent, 17vh, var(--darkerGradientPointAlpha) 50vh);
+}
+
+.detailPagePrimaryContainer {
+align-content: space-between;
+    align-items: stretch;
+    justify-content: end;
+    flex-direction: column;
+    /* center content on desktop */
+    align-items: center;
+    /* this aligns the plot to left on 10.11.0 */
+    text-align: left;
+    /* temporarily disabled for 10.11.0 */
+    /* margin-bottom: -1.5em; */
+}
+
+.layout-desktop .detailPagePrimaryContainer {
+background: transparent;
+}
+
+.layout-desktop .detailPageSecondaryContainer {
+background-color: transparent;
+}
+
+.detailPagePrimaryContainer>.detailPagePrimaryContent,
+[dir=ltr] .detailPagePrimaryContainer>.detailRibbon,
+/* this removes the extra large left padding on pre-10.11.0 */
+[dir=ltr] .detailPagePrimaryContainer.detailRibbon {
+padding-left: var(--sidePadding);
+}
+
+.layout-desktop [dir="ltr"] .detailRibbon {
+flex-direction: column;
+}
+
+.detailPagePrimaryContainer > .detailPagePrimaryContent {
+padding-top: 0;
+}
+
+.detailPageSecondaryContainer {
+/* use !important for pre-10.11.0 compatibility */
+    padding-top: 0 !important;
+}
+
+.skinHeader-withBackground:not(.semiTransparent) .headerHomeButton {
+display: none;
+}
+
+.pageTitle {
+height: 1.5em;
+}
+
+.headerLeft .pageTitle {
+display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+#itemDetailPage .emby-scroller-container,
+#itemDetailPage .emby-scroller,
+#itemDetailPage .scrollX {
+margin: 0 calc(-1 * var(--sidePadding));
+    padding-left: calc(var(--sidePadding) - 0.375em);
+    /* mask-image: linear-gradient(90deg, transparent, white var(--sidePadding), white calc(100vw - var(--sidePadding)), transparent); */
+}
+
+.detailRibbon {
+background-color: transparent;
+}
+
+.mediaInfoItem {
+border-radius: var(--smallRadius);
+    font-weight: 500;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.itemMiscInfo-primary {
+column-gap: 0.5em;
+}
+
+.mediaInfoOfficialRating {
+background: transparent !important;
+    font-size: 0.75em;
+    font-family: "Noto Sans", sans-serif;
+    line-height: 1.5em;
+    transform: translateY(-0.15em);
+    font-weight: 600;
+    border: var(--defaultBorder);
+    color: var(--textColor);
+}
+
+[dir="ltr"] .mediaInfoCriticRating {
+background-size: 30%;
+    padding-left: 1.5em;
+}
+
+[dir="ltr"] .mediaInfoCriticRating::after {
+content: "%";
+}
+
+.detailRibbon:has(.portraitCard .folder) {
+min-height: 32vh;
+    align-content: flex-end;
+}
+
+.layout-desktop .detailRibbon {
+height: 100%;
+    min-height: 25vh;
+    margin-top: unset;
+}
+
+.itemBackdrop {
+display: block !important;
+}
+
+.layout-desktop .itemBackdrop {
+height: calc(100vh - 27vh - var(--primaryItemPageNegativeSpace));
+}
+
+#itemDetailPage:has(.subtitle) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .backdropCard) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .queue) .itemBackdrop,
+#itemDetailPage:has(.detailImageContainer .live_tv) .itemBackdrop {
+height: calc(100vh - 27vh - var(--secondaryItemPageNegativeSpace));
+}
+
+.detailLogo {
+display: var(--clearLogoVisibility);
+    top: calc(100vh - var(--clearLogoBottomSpace) - var(--primaryItemPageNegativeSpace));
+    left: 0;
+    width: 40%;
+    transform: translateY(-100%);
+    margin: auto 30%;
+    height: 25vh;
+    background-position: bottom;
+}
+
+#itemDetailPage:has(.subtitle) .detailLogo {
+top: calc(100vh - 6em - var(--secondaryItemPageNegativeSpace));
+}
+
+.layout-desktop .detailImageContainer .card {
+position: relative !important;
+    width: 22vh !important;
+    float: none;
+    left: 0 !important;
+    top: 0;
+    right: 0;
+    margin: auto;
+    margin-bottom: 0;
+    place-self: center;
+}
+
+.detailImageContainer .card.backdropCard {
+width: 40vh !important;
+    max-width: 50vw;
+}
+
+.detailImageContainer .card {
+display: none;
+}
+
+.infoWrapper {
+align-content: end;
+    place-items: center;
+    display: grid;
+    /* this centers the title and other text on 10.11.0 */
+    text-align: center;
+}
+
+#itemDetailPage:has(.detailImageContainer .backdropCard) .detailLogo {
+z-index: 2;
+    display: none;
+}
+
+.detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer h1 {
+z-index: 2;
+    display: var(--itemTitleVisibility);
+}
+
+.detailLogo.hide ~ .detailPageWrapperContainer .nameContainer h1 {
+display: block !important;
+}
+
+.detailImageContainer:has(.backdropCard, .squareCard) ~ .nameContainer h1 {
+display: block !important;
+}
+
+.detailImageContainer > .backdropCard,
+.detailImageContainer > .squareCard,
+.detailImageContainer > .card:has(.live_tv) {
+display: block;
+}
+
+#itemDetailPage:has(.subtitle) {
+background: linear-gradient(180deg, var(--darkerGradientPointAlpha) 80%, transparent);
+}
+
+.tagline {
+font-size: 1.3em;
+    font-weight: 400;
+    margin: 0;
+    font-style: italic;
+    color: var(--textColor);
+}
+
+html,
+.backdropContainer {
+background-color: var(--darkerGradientPoint);
+    background: var(--backgroundGradient);
+}
+
+.backdropImage {
+background-position-y: clamp(0%, calc(var(--backdropTrimFromTop) * 5), 100%);
+}
+
+.backdropImage:after,
+.backdropImage:before {
+content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: inherit;
+}
+
+.backdropImage:after {
+z-index: 0;
+    height: 80vh;
+    -webkit-mask: linear-gradient(180deg, rgba(0, 0, 0, 1) 75%, transparent);
+    mask: linear-gradient(180deg, rgba(0, 0, 0, 1) 75%, transparent);
+}
+
+.layout-desktop .backdropImage:after {
+transition: opacity 0.25s;
+}
+
+.backdropImage:before {
+transform: scale(1.1);
+    filter: var(--blurLargest);
+}
+
+.backgroundContainer.withBackdrop {
+opacity: 0.9;
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(17, 24, 39, 0.25));
+}
+
+.backdropImageFadeIn {
+transform-origin: bottom center;
+    animation: animScaleUp 0.5s ease-out forwards;
+}
+
+.itemExternalLinks {
+color: var(--textColor);
+}
+
+.itemExternalLinks.focuscontainer-x {
+color: transparent;
+}
+
+.itemExternalLinks.focuscontainer-x > .button-link {
+color: var(--textColor);
+    background-color: var(--selectorBackgroundColor);
+    padding: 0.125em 0.5em;
+    border-radius: var(--smallerRadius);
+    margin-bottom: 0.5em;
+}
+
+.layout-desktop .itemExternalLinks.focuscontainer-x > a:hover,
+.itemExternalLinks.focuscontainer-x > a:active {
+background-color: var(--activeColor) !important;
+    color: white !important;
+}
+
+.layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="themoviedb.org"]:hover,
+.itemExternalLinks.focuscontainer-x > a[href*="themoviedb.org"]:active {
+background-color: rgb(26, 183, 216) !important;
+    color: black !important;
+}
+
+.layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="imdb.com"]:hover,
+.itemExternalLinks.focuscontainer-x > a[href*="imdb.com"]:active {
+background-color: rgb(226, 182, 22) !important;
+    color: black !important;
+}
+
+.layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="thetvdb.com"]:hover,
+.itemExternalLinks.focuscontainer-x > a[href*="thetvdb.com"]:active {
+background-color: rgb(108, 213, 145) !important;
+    color: black !important;
+}
+
+.layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="trakt.tv"]:hover,
+.itemExternalLinks.focuscontainer-x > a[href*="trakt.tv"]:active {
+background-color: rgb(171, 58, 173) !important;
+    color: var(--textColor) !important;
+}
+
+.overview-expand.emby-button {
+padding: 0;
+    margin-top: 1.4em;
+    margin-bottom: 1.4em;
+    color: transparent;
+}
+
+.overview-expand.emby-button:after {
+content: "";
+    font-family: "Material Icons";
+    background: var(--selectorBackgroundColor);
+    border-radius: 50%;
+    width: 1.5em;
+    height: 1.5em;
+    align-content: center;
+    line-height: 1.6ch;
+    transition: transform 0.5s;
+    color: var(--textColor);
+}
+
+.overview.detail-clamp-text ~ .overview-controls .overview-expand:after {
+transform: rotateZ(0deg);
+}
+
+.overview:not(.detail-clamp-text) ~ .overview-controls .overview-expand:after {
+transform: rotateZ(180deg);
+}
+
+.overview-controls {
+height: 0;
+}
+
+.detailSectionContent:has(.itemExternalLinks.hide) .overview-controls {
+height: 1em;
+}
+
+#seriesAirTime {
+margin-top: 0.5em;
+}
+
+.itemMiscInfo {
+align-items: flex-end !important;
+    justify-content: center;
+}
+
+.subtitleEditor-dropZone {
+border-radius: var(--largeRadius);
+}
+
+.mainDetailButtons:has(.detailButton[data-type="Book"]) .btnPlay[title="Play"]:after {
+content: "Read";
+}
+
+.mainDetailButtons:has(.detailButton[data-type="Book"]) .btnPlay .material-icons.play_arrow:before {
+content: "";
+    padding-inline-end: 1ch;
+}
+
+.mainDetailButtons {
+justify-content: center;
+    margin: 0;
+}
+
+.listItem-overview {
+display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.listItem-bottomoverview,
+[dir="ltr"] .listItem:not(.actionSheetMenuItem)[data-type="Episode"] .listItem-overview p {
+margin-top: 0.75em;
+    margin-bottom: 0em;
+}
+
+#itemDetailPage .detailSection {
+display: grid;
+    row-gap: 1em;
+    column-gap: 3em;
+    max-width: unset !important;
+    grid-template-columns: 25% 1fr 1fr 1fr;
+    margin-bottom: 1.5em;
+}
+
+.detailPageContent {
+gap: 1em;
+}
+
+.trackSelections {
+order: 3;
+    max-width: unset !important;
+    margin-top: 1em;
+    border: var(--defaultBorder);
+    border-radius: var(--smallRadius);
+    padding: 1em;
+    grid-column: 3 / 5;
+    background-color: var(--lighterGradientPointAlpha);
+}
+
+.detailsGroupItem,
+.trackSelections .selectContainer {
+max-width: unset !important;
+    align-items: baseline;
+}
+
+.detailSectionContent a:not(.overview-expand) {
+text-align: start;
+}
+
+.layout-desktop .detailSectionContent {
+display: grid;
+    align-content: end;
+    min-height: 16vh;
+}
+
+.detailSectionContent:has(.tagline.hide + .overview.hide) {
+min-height: unset;
+}
+
+.itemDetailsGroup {
+outline: none;
+    overflow: hidden;
+    margin-top: 1em;
+    border-radius: var(--smallRadius);
+    background-color: var(--lighterGradientPointAlpha);
+    border: none;
+    box-shadow: inset 0 0 0 0.06em var(--borderColor) !important;
+    order: 2;
+    grid-column: 1 / 3;
+}
+
+.detailsGroupItem {
+margin: 0 !important;
+    justify-content: space-between;
+    padding: 0.5em 0.9em;
+    align-items: baseline;
+}
+
+.detailsGroupItem:not(:last-child) {
+border-bottom: var(--defaultBorder);
+}
+
+.detailsGroupItem > .label {
+font-weight: 600;
+    flex-basis: 6em;
+}
+
+.detailsGroupItem > .content > a {
+font-weight: 400;
+    text-align: end;
+}
+
+.detailsGroupItem > .content {
+text-align: end;
+    color: var(--dimTextColor);
+}
+
+.detailsGroupItem > .label {
+color: var(--textColor);
+}
+
+.detailSection > .nextUpSection {
+order: 5;
+    grid-column: 1;
+}
+
+.detailSection > #listChildrenCollapsible {
+order: 6;
+    grid-column: 2 / -1;
+}
+
+.detailSectionContent {
+order: 1;
+    grid-column: 1 / -1;
+}
+
+.nextUpSection.hide ~ #listChildrenCollapsible,
+.trackSelections.hide ~ .recordingFields.hide ~ .itemDetailsGroup {
+grid-column: 1 / -1;
+}
+
+.collectionItems {
+    grid-column: 1 / -1;
+}
+
+.collectionItems .sectionTitleContainer.padded-left {
+    padding-left: 0.375em;
+}
+
+.collectionItemsContainer.padded-left {
+    padding-left: 0;
+}
+
+
+[dir="ltr"] .detailPageContent {
+padding-left: var(--sidePadding) !important;
+    padding-right: var(--sidePadding) !important;
+}
+
+[dir="ltr"] .detailPageContent > .detailPagePrimaryContent {
+padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+#itemDetailPage .verticalSection .itemsContainer.padded-right {
+padding-right: 0 !important;
+}
+
+.upNextContainer {
+border-radius: var(--largeRadius);
+    color: var(--textColor);
+}
+
+[dir="ltr"] .upNextContainer {
+margin: 2em;
+    box-sizing: border-box;
+    max-width: 80vw;
+}
+
+.upNextContainer .btnStartNow {
+background-color: var(--btnSubmitColor);
+    border-color: var(--btnSubmitBorderColor);
+}
+
+.upNextDialog-title {
+white-space: pre-wrap;
+    width: unset;
+}
+
+.upNextDialog-buttons {
+width: unset;
+    flex-wrap: wrap;
+}
+
+.upNextContainer .upNextDialog-countdownText {
+color: white;
+}
+
+.upNextContainer {
+background: var(--headerColor) !important;
+    border: var(--defaultBorder) !important;
+    backdrop-filter: var(--blurDefault);
+}
+
+.nameContainer > h3,
+.nameContainer > h1 {
+word-break: break-word;
+    overflow: hidden;
+}
+
+.nameContainer > h1.itemName,
+.nameContainer > h1.parentName {
+font-size: 4em;
+    white-space: pre-wrap;
+    padding-bottom: 0.5ch;
+    color: white;
+}
+
+.nameContainer > h1.itemName,
+.nameContainer > h1.parentName,
+.nameContainer > h1.itemName a,
+.nameContainer > h1.parentName a {
+font-weight: 200;
+}
+
+.nameContainer > h1.itemName bdi,
+.nameContainer > h1.parentName bdi,
+.nameContainer > h1.itemName a,
+.nameContainer > h1.parentName a {
+overflow: hidden;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.subtitle {
+font-size: 2em;
+    padding-bottom: 1em;
+}
+
+.subtitleappearance-preview {
+border-radius: var(--smallRadius);
+}
+
+.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent.noHeaderRight {
+display: none;
+}
+
+.skinHeader-withBackground.semiTransparent {
+--headerBackground: none;
+    backdrop-filter: none;
+    background-color: transparent;
+    border: none;
+}
+
+.skinHeader-withBackground.semiTransparent .headerButton {
+text-shadow: 1px 1px 0 #00000080;
+}
+
+
+
+
+
+
+
+
+
+
 /* Variables */
 :root {
     --primary-r: 0;
@@ -13,18 +677,17 @@
     --rounded-cards: 15px;
     --blur: 10px;
 
-    /* Alternate accents*/
-    --primary-alt1: rgb(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 1);
-    --primary-alt2: rgb(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.85);
-    --primary-alt3: rgb(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.7);
-    --primary-alt4: rgb(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.55);
-    --primary-alt5: rgb(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.4);
+    /* Alternate accents */
+    --primary-alt1: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 1);
+    --primary-alt2: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.85);
+    --primary-alt3: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.7);
+    --primary-alt4: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.55);
+    --primary-alt5: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.4);
 }
 
 /* Setting accent color variable */
 .emby-checkbox:checked + span + .checkboxOutline,
 .selectionCommandsPanel,
-.countIndicator,
 progress[aria-valuenow]:before {
     background: var(--primary-accent-color) !important;
 }
@@ -64,27 +727,15 @@ progress::-webkit-progress-value {
         background-color: var(--secondary-accent-color) !important;
     }
 }
+
 /* Dynamic colors for default cards */
-.defaultCardBackground1 {
-    background-color: var(--primary-alt1) !important;
-}
-.defaultCardBackground2 {
-    background-color: var(--primary-alt2) !important;
-}
-.defaultCardBackground3 {
-    background-color: var(--primary-alt3) !important;
-}
-.defaultCardBackground4 {
-    background-color: var(--primary-alt4) !important;
-}
-.defaultCardBackground5 {
-    background-color: var(--primary-alt5) !important;
-}
-/* Background colors */
-.noBackdropTransparency .detailPagePrimaryContainer,
-.noBackdropTransparency .detailPageSecondaryContainer {
-    background-color: var(--primary-background-color) !important;
-}
+.defaultCardBackground1 { background-color: var(--primary-alt1) !important; }
+.defaultCardBackground2 { background-color: var(--primary-alt2) !important; }
+.defaultCardBackground3 { background-color: var(--primary-alt3) !important; }
+.defaultCardBackground4 { background-color: var(--primary-alt4) !important; }
+.defaultCardBackground5 { background-color: var(--primary-alt5) !important; }
+
+
 
 /* Increase size of Jellyfin logo */
 .layout-desktop .pageTitleWithLogo {
@@ -97,10 +748,6 @@ progress::-webkit-progress-value {
     margin: 0 !important;
 }
 
-.layout-mobile .mainDrawer-scrollContainer {
-    margin-top: 15px !important;
-}
-
 /* Fix for Jellyfin Media Player */
 .quickConnectSettingsContainer {
     margin-left: 250px !important;
@@ -110,31 +757,30 @@ progress::-webkit-progress-value {
 .layout-desktop .headerHomeButton {
     display: none !important;
 }
+
 /* Fix for video player and login page */
 .layout-desktop .hide-scroll .mainDrawer,
 .layout-desktop .hideMainDrawer .mainDrawer {
     left: -320px !important;
 }
+
 /* Fix for collection items misalignment */
-.layout-desktop .collectionItems .collectionItemsContainer {
-    padding-left: 0% !important;
-}
+.layout-desktop .collectionItems .collectionItemsContainer,
 .layout-desktop .collectionItems .sectionTitleContainer {
-    padding-left: 0% !important;
+    padding-left: 0 !important;
 }
+
 /* Dynamic buttons */
 .layout-desktop .navMenuOption:hover:not(.navMenuOption-selected) {
     transform: scale(1.05) !important;
 }
 .layout-desktop .listItem {
-    transition: .2s !important;
+    transition: 0.2s !important;
     border-radius: var(--rounded-cards) !important;
 }
 .layout-desktop #myPreferencesMenuPage .listItem:hover {
     transform: scale(1.015);
 }
-
-
 
 /* Rounded cards */
 .cardContent,
@@ -146,6 +792,7 @@ progress::-webkit-progress-value {
 .nowPlayingPageImage {
     border-radius: var(--rounded-cards) !important;
 }
+
 /* Rounded selection menu */
 .itemSelectionPanel {
     border: 2px solid var(--primary-accent-color) !important;
@@ -154,15 +801,13 @@ progress::-webkit-progress-value {
     margin: 7px !important;
 }
 
-
-
 /* Floating progress bar */
 .innerCardFooter {
     border-radius: var(--rounded-cards) !important;
     margin-left: 5px !important;
     margin-bottom: 5px !important;
     padding: 5px 15px 5px 5px !important;
-    bottom: 0% !important;
+    bottom: 0 !important;
     background: rgba(0,0,0,0.5) !important;
     backdrop-filter: blur(var(--blur)) !important;
 }
@@ -171,7 +816,7 @@ progress::-webkit-progress-value {
     width: 90% !important;
     margin: auto !important;
     border-radius: 100px !important;
-    padding: 0px !important;
+    padding: 0 !important;
     backdrop-filter: none !important;
 }
 .itemProgressBar:not(.playbackProgress):not(.transcodingProgress):not(.backgroundProgress) {
@@ -181,23 +826,14 @@ progress::-webkit-progress-value {
     border-radius: 100px !important;
 }
 .innerCardFooterClear {
-    background-color: none !important;
+    background-color: transparent !important;
 }
 .innerCardFooter .cardText {
-    padding: 0 0 0 10px !important
+    padding: 0 0 0 10px !important;
 }
 .cardImageContainer .innerCardFooter .itemProgressBar .itemProgressBarForeground {
     background: var(--primary-accent-color) !important;
 }
-
-
-
-/* Green watched indicator */
-.playedIndicator {
-    background: #409843 !important;
-}
-
-
 
 /* Rounded left drawer buttons */
 .navMenuOption,
@@ -214,6 +850,7 @@ progress::-webkit-progress-value {
 .navMenuOption:hover:not(.navMenuOption-selected) {
     background-color: rgba(44, 44, 44, 0.7);
 }
+
 /* Center icons and text and shift to the left */
 .navMenuOptionIcon,
 .navMenuOptionText {
@@ -221,6 +858,7 @@ progress::-webkit-progress-value {
     left: -10% !important;
     margin-top: 0 !important;
 }
+
 /* Fix for header buttons */
 .layout-desktop .emby-button-foreground {
     top: -9px !important;
@@ -228,8 +866,6 @@ progress::-webkit-progress-value {
 .layout-tv .emby-button-foreground {
     top: -14px !important;
 }
-
-
 
 /* Custom button color */
 .navMenuOption-selected {
@@ -244,7 +880,6 @@ html,
     background-color: var(--primary-background-color) !important;
 }
 
-
 /* Transparent header bar */
 .skinHeader {
     background-color: transparent !important;
@@ -256,6 +891,7 @@ html,
 .layout-tv .skinHeader {
     padding-bottom: 10px !important;
 }
+
 /* Rounded header buttons */
 .headerTabs,
 .headerRight {
@@ -271,24 +907,28 @@ html,
     margin-left: 160px !important;
     margin-top: -58px !important;
 }
+
 /* Button height */
 .headerRight,
 .emby-tab-button {
     height: 45px !important;
 }
-/* Lower header and add padding to right buttons */
+
+/* Padding for right header buttons */
 .layout-desktop .headerRight {
-    padding: 0px 5px !important;
+    padding: 0 5px !important;
 }
 .layout-tv .headerRight {
     padding: 20px 10px !important;
 }
+
 /* Move left header back up */
-.layout-desktop .headerLeft
+.layout-desktop .headerLeft,
 .layout-tv .headerLeft {
     position: relative !important;
     top: -17px !important;
 }
+
 /* Mobile fixes */
 .layout-mobile .sectionTabs {
     margin-left: auto !important;
@@ -300,15 +940,15 @@ html,
     top: -2px !important;
 }
 .layout-mobile .skinHeader {
-    transition: .1s !important;
+    transition: 0.1s !important;
 }
-.layout-mobile .mainDrawer {
-    background: var(--secondary-background-color) !important;
+.layout-mobile .mainDrawer-scrollContainer {
+    margin-top: 15px !important;
 }
 .layout-mobile .headroom--unpinned {
     transform: none;
 }
-.layout-mobile .headroom--unpinned:has(.headerTabs.sectionTabs:not(.hide))  {
+.layout-mobile .headroom--unpinned:has(.headerTabs.sectionTabs:not(.hide)) {
     transform: translateY(-50%);
 }
 .layout-mobile .headroom--not-top {
@@ -323,10 +963,11 @@ html,
     background: transparent !important;
     backdrop-filter: none !important;
 }
-.layout-mobile .headroom--top .headerRight ,
+.layout-mobile .headroom--top .headerRight,
 .layout-mobile .headroom--not-top:has(.headerTabs.sectionTabs:not(.hide)) .headerRight {
     background: var(--primary-background-transparent) !important;
 }
+
 @media (max-width: 380px) {
     .layout-mobile .pageTitle:not(.pageTitleWithLogo):not(:empty) {
         position: absolute !important;
@@ -352,10 +993,9 @@ html,
     }
 }
 
-
-
 /* Player modifications */
-.upNextContainer:not(#skipIntro), .toastVisible {
+.upNextContainer:not(#skipIntro),
+.toastVisible {
     backdrop-filter: blur(var(--blur)) !important;
 }
 .upNextContainer:not(#skipIntro) {
@@ -379,6 +1019,7 @@ html,
     top: 25px !important;
     backdrop-filter: unset !important;
 }
+
 @supports selector(div:not(.parent .child)) {
     .mdl-slider-background-flex:not(.layout-mobile .nowPlayingBar .mdl-slider-background-flex) {
         height: 10px !important;
@@ -395,10 +1036,12 @@ html,
         background: hsla(0,0%,100%,.2) !important;
     }
 }
+
 .mdl-slider-background-lower {
     border-radius: 100px !important;
     background-color: var(--primary-accent-color) !important;
 }
+
 /* Moz */
 .mdl-slider::-moz-range-thumb {
     background: #ffffff00 !important;
@@ -410,6 +1053,7 @@ html,
     transform: scaleY(2);
     background: #fff !important;
 }
+
 /* Webkit */
 .mdl-slider::-webkit-slider-thumb {
     background: #ffffff00 !important;
@@ -434,7 +1078,7 @@ html,
 
 /* Up next card */
 .upNextDialog-buttons .upNextDialog-button {
-    transition: .2s !important;
+    transition: 0.2s !important;
 }
 .upNextDialog-buttons .upNextDialog-button:hover {
     transform: scale(1.1);
@@ -468,7 +1112,7 @@ html,
     backdrop-filter: blur(var(--blur)) !important;
 }
 #skipIntro .btnSkipIntro:hover {
-    transition: .2s;
+    transition: 0.2s;
     transform: scale(1.05);
     background: var(--primary-accent-color) !important;
 }
@@ -491,29 +1135,30 @@ html,
     z-index: 10 !important;
 }
 #skipIntro .upNextContainer {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 #skipIntro .emby-button {
     background: rgba(30, 30, 30, 0.7) !important;
 }
 #skipIntro .emby-button:hover {
-    box-shadow: 0 0 8px rgba(var(--primary-accent-color), 0.6) !important;
+    box-shadow: 0 0 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6) !important;
 }
 #skipIntro .emby-button:focus {
     background: rgba(30, 30, 30, 0.7) !important;
     box-shadow: unset !important;
 }
+
 /* Support for InPlayerEpisodePreview plugin */
 .layout-desktop #popupFocusContainer {
     padding: 10px !important;
 }
 .layout-desktop #popupTitleContainer {
-    margin: 0px !important;
-    padding: 10px 0px 10px 0px !important;
+    margin: 0 !important;
+    padding: 10px 0 !important;
 }
 .layout-desktop #popupContentContainer .previewEpisodeDetails {
     position: unset !important;
-    margin: 0px 0px 6px 10px !important;
+    margin: 0 0 6px 10px !important;
     font-size: 13.5px !important;
 }
 .layout-desktop #popupContentContainer .previewEpisodeTitle {
@@ -524,17 +1169,9 @@ html,
 }
 
 /* Modify player buttons */
-.material-icons.fast_rewind::before {
-    content: "\e059";
-}
-.material-icons.fast_forward::before {
-    content: "\e057";
-}
-.material-icons.audiotrack::before {
-    content: "\e91f";
-}
-
-
+.material-icons.fast_rewind::before { content: "\e059"; }
+.material-icons.fast_forward::before { content: "\e057"; }
+.material-icons.audiotrack::before  { content: "\e91f"; }
 
 /* Settings modifications */
 .emby-input,
@@ -553,269 +1190,37 @@ html,
 .button-submit {
     background: var(--primary-accent-color) !important;
 }
+
 /* Modify username placement on profile page */
-.layout-desktop #userProfilePage .readOnlyContent div:not([class]), div[class=""]{
+.layout-desktop #userProfilePage .readOnlyContent div:not([class]), div[class=""] {
     align-items: initial !important;
 }
 .layout-desktop .username {
-    margin: 0px 0px 10px 10px !important;
+    margin: 0 0 10px 10px !important;
 }
+
 /* Remove border under certain dashboard items */
 .listItem-border {
     border: 0 !important;
 }
+
 /* Add padding to list items */
 .layout-desktop .listItem,
 .layout-tv .listItem {
     padding-inline: 15px !important;
 }
+
 /* Center the Quick Connect page */
 .layout-desktop #quickConnectPreferencesPage form {
     margin: auto;
 }
+
 /* Theme icons for certain list objects */
 .listItemIcon:not(.listItemIcon-transparent):not(.notification_important) {
     background: var(--secondary-accent-color) !important;
     color: var(--primary-accent-color) !important;
 }
 
-
-
-/* Resize show/movie image on details page */
-.layout-desktop .detailImageContainer .card {
-    top: 1.8em !important;
-    width: 18.3vw !important;
-    position: static !important;
-    margin-bottom: 0 !important;
-}
-
-/* Re-position content on details page */
-.layout-desktop .detailPageContent {
-    padding-left: 3.3% !important;
-    padding-right: 0 !important;
-}
-
-/* Re-position logo */
-.layout-desktop .detailLogo,
-.layout-tv .detailLogo {
-    right: 0 !important;
-    left: 4% !important;
-    top: 10% !important;
-}
-
-/* Transparent ribbon bar */
-.detailRibbon {
-    background: transparent !important;
-}
-
-/* Add card around top-right buttons */
-.mainDetailButtons {
-    background: var(--primary-background-transparent) !important;
-    border-radius: 100px !important;
-    backdrop-filter: blur(var(--blur)) !important;
-}
-
-/* Add card around groups section */
-.layout-desktop .detailsGroupItem {
-    background: var(--secondary-background-color) !important;
-    padding: 10px 20px !important;
-    border-radius: 20px !important;
-    width: fit-content !important;
-    max-width: max-content !important;
-    display: flex;
-    gap: 1em;
-}
-
-/* Fix for group section labels */
-.detailsGroupItem .label, .trackSelections .selectContainer .selectLabel {
-    min-width: 75px;
-    flex-basis: unset;
-    margin: unset;
-}
-
-/* Mobile media details page */
-.layout-mobile .itemDetailsGroup {
-    background: var(--secondary-background-color) !important;
-    padding: 15px 20px 5px 20px !important;
-    border-radius: var(--rounded-cards) !important;
-}
-.layout-mobile .detailPagePrimaryContent .itemsContainer.scrollX,
-.layout-mobile .detailPageSecondaryContainer .emby-scroller  {
-    margin-inline: -5% !important;
-    padding-inline: 5% !important;
-}
-.layout-mobile .detailSection {
-    display: flex !important;
-}
-.layout-mobile .detailSection {
-    display: flex;
-    flex-direction: column;
-}
-.layout-mobile .detailSection .detailSectionContent {
-    order: 1;
-}
-.layout-mobile .detailSection .recordingFields {
-    order: 2;
-}
-.layout-mobile .detailSection .trackSelections {
-    order: 3;
-}
-.layout-mobile .detailSection .itemDetailsGroup {
-    order: 4;
-}
-.layout-mobile .detailSection .nextUpSection {
-    padding-top: 15px !important;
-    order: 5;
-}
-.layout-mobile .detailSection #listChildrenCollapsible {
-    order: 6;
-}
-
-/* Add card around description */
-.layout-desktop .detailSectionContent {
-    background: var(--secondary-background-color) !important;
-    border-radius: var(--rounded-cards) !important;
-    padding: 40px 20px 10px 20px !important;
-    margin-top: 44px !important;
-}
-@supports selector(:has(*)) {
-    .layout-desktop .detailPageWrapperContainer:not(:has(.itemMiscInfo-primary .mediaInfoItem)) .detailSectionContent {
-        padding: 0px 20px 10px 20px !important;
-    }
-}
-.layout-mobile .detailSectionContent {
-    background: var(--secondary-background-color) !important;
-    border-radius: var(--rounded-cards) !important;
-    padding: 0px 20px 10px 20px !important;
-}
-/* Fix content shifting when clicking "Show more" on a long description */
-.layout-desktop .detailSectionContent .overview {
-    display: -webkit-box !important;
-}
-
-/* Add card around track selection */
-.trackSelections {
-    background: var(--secondary-background-color) !important;
-    border-radius: var(--rounded-cards) !important;
-    padding: 10px 20px !important;
-    margin-top: 20px !important;
-}
-
-/* Fix for track select dropdowns */
-.trackSelections .selectContainer .detailTrackSelect {
-    padding: 0 10px;
-    margin-left: 10px !important;
-}
-
-/* Re-position title */
-.layout-desktop .infoWrapper {
-    margin-top: 245px !important;
-    margin-left: 20.9vw !important;
-}
-.layout-desktop .detailPagePrimaryContainer {
-    padding-left: 3.3% !important;
-}
-/* Fix for title position on 10.11.X */
-.layout-desktop [dir="ltr"] .detailPagePrimaryContainer:not(.detailRibbon) .detailRibbon {
-    padding-left: unset !important;
-}
-.layout-desktop .nameContainer {
-    position: absolute !important;
-    margin-top: -48px !important;
-}
-.layout-desktop .itemMiscInfo {
-    position: absolute !important;
-    margin-left: 12px !important;
-    margin-top: 16px !important;
-}
-
-
-
-/* Media detail page */
-/* Change page layout to grid */
-.layout-desktop .detailPageWrapperContainer .detailPagePrimaryContainer {
-    display: grid;
-    grid-template-areas:
-        "ribbon   ribbon"
-        "image    scontent"
-        "image    tselection"
-        "image    igroup"
-        "nextup   nextup"
-        "children children"
-        "citems   citems"
-        "pguide   pguide";
-
-    grid-template-rows:
-        auto
-        max-content
-        auto
-        1fr
-        auto
-        auto
-        auto
-        auto;
-
-    grid-template-columns: minmax(auto, 18.3vw) 1fr;
-}
-.layout-desktop .detailPageWrapperContainer .detailPagePrimaryContent,
-.layout-desktop .detailPageWrapperContainer .detailSection {
-    display: contents;
-}
-.layout-desktop .detailPageWrapperContainer .detailRibbon {
-    grid-area: ribbon;
-    margin-bottom: 25px !important;
-}
-.layout-desktop .detailPageWrapperContainer .detailImageContainer {
-    grid-area: image;
-    margin-bottom: 1.3vw !important;
-}
-.layout-desktop .detailPageWrapperContainer .detailSectionContent {
-    grid-area: scontent;
-    margin-right: max(env(safe-area-inset-right),3.3%) !important;
-}
-.layout-desktop .detailPageWrapperContainer .trackSelections {
-    grid-area: tselection;
-}
-.layout-desktop .detailPageWrapperContainer .itemDetailsGroup {
-    grid-area: igroup;
-}
-.layout-desktop .detailPageWrapperContainer .detailSectionContent,
-.layout-desktop .detailPageWrapperContainer .trackSelections,
-.layout-desktop .detailPageWrapperContainer .itemDetailsGroup {
-    margin-left: 2.1vw !important;
-    align-self: start;
-}
-.layout-desktop .detailPageWrapperContainer .nextUpSection {
-    grid-area: nextup;
-}
-.layout-desktop .detailPageWrapperContainer #listChildrenCollapsible {
-    grid-area: children;
-}
-.layout-desktop .detailPageWrapperContainer .collectionItems {
-    grid-area: citems;
-}
-.layout-desktop .detailPageWrapperContainer .programGuideSection {
-    grid-area: pguide;
-}
-/* Move episode title */
-.layout-desktop .nameContainer {
-    display: flex;
-    flex-direction: row;
-}
-.layout-desktop .nameContainer .parentName {
-    order: 1;
-}
-.layout-desktop .nameContainer .itemName {
-    order: 2;
-}
-/* Modify original title / episode name position */
-.layout-desktop .nameContainer .itemName.originalTitle {
-    margin: .5em 20px !important;
-}
-.layout-desktop .nameContainer .itemName.infoText.subtitle {
-    margin: .5em 20px !important;
-    padding: 0px !important;
-}
 /* Modify play button */
 .layout-desktop .mainDetailButtons .btnPlay::after {
     content: "Play" !important;
@@ -825,19 +1230,21 @@ html,
     margin-right: -85px !important;
     padding-right: 20px !important;
     right: 110px !important;
-    background: var(--primary-accent-color) !important;
+    background: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6) !important;
     border-radius: 100px !important;
-    color: var(--secondary-background-color) !important;
+    color: #1c1c1e !important;
 }
 .layout-desktop .mainDetailButtons .detailButton {
     -webkit-flex-direction: row !important;
     flex-direction: row !important;
 }
+
 /* Change crop for list item images */
 .listItemImage {
     background-size: contain !important;
     border-radius: var(--rounded-cards);
 }
+
 /* Move up content if no backdrop image is present */
 @supports selector(:has(*)) {
     .layout-desktop:not(:has(.backdropContainer .backdropImage)) #itemBackdrop {
@@ -876,9 +1283,7 @@ html,
     }
 }
 
-
-
-/* Fixes for TV Layout */
+/* Fixes for TV layout */
 .layout-tv .sectionTabs {
     width: auto !important;
 }
@@ -886,22 +1291,18 @@ html,
     padding: 5px !important;
 }
 
-
-
 /* Login page */
 .layout-desktop #loginPage {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-/* Login box */
 .layout-desktop #loginPage .padded-left.padded-right.padded-bottom-page.margin-auto-y {
     background: var(--secondary-background-color) !important;
     width: 450px !important;
     border-radius: 25px !important;
     padding: 3em !important;
 }
-/* Forgot password button */
 .layout-desktop #loginPage .readOnlyContent {
     position: relative !important;
 }
@@ -920,7 +1321,6 @@ html,
     z-index: 1 !important;
     transition: none !important;
 }
-/* User cards */
 .layout-desktop #loginPage .squareCard {
     width: 25% !important;
     font-size: smaller !important;
@@ -928,7 +1328,6 @@ html,
 .layout-desktop #loginPage .squareCard .cardBox {
     margin-inline: 0.6em !important;
 }
-/* Scaling */
 @media (max-width: 100em) {
     .layout-desktop #loginPage .squareCard {
         width: 20% !important;
@@ -940,23 +1339,6 @@ html,
         margin-left: 470px !important;
     }
 }
-@media (max-width: 87.5em) {
-    .layout-desktop #loginPage .squareCard {
-        width: 20% !important;
-    }
-}
-@media (max-width: 75em) {
-    .layout-desktop #loginPage .squareCard {
-        width: 20% !important;
-    }
-}
-@media (max-width: 43.75em) {
-    .layout-desktop #loginPage .squareCard {
-        width: 20% !important;
-    }
-}
-
-
 
 /* Dialog box */
 .dialog {
@@ -966,17 +1348,7 @@ html,
     margin: 10px 20px !important;
 }
 
-
-
 /* Dynamic backdrop support */
-
-/* Translucent cards */
-.layout-desktop #itemDetailPage:not(.noBackdropTransparency) .detailsGroupItem,
-.layout-desktop #itemDetailPage:not(.noBackdropTransparency) .detailSectionContent,
-.layout-desktop #itemDetailPage:not(.noBackdropTransparency) .trackSelections {
-    background: var(--primary-background-transparent) !important;
-    backdrop-filter: blur(var(--blur)) !important;
-}
 
 /* Transparent drawer */
 .layout-desktop .backgroundContainer.withBackdrop + div .mainDrawer {
@@ -986,7 +1358,7 @@ html,
     background: var(--secondary-background-color) !important;
 }
 
-/* Blur buttons */
+/* Blur nav buttons with backdrop */
 .layout-desktop:has(.backgroundContainer.withBackdrop) .navMenuOption-selected {
     backdrop-filter: blur(var(--blur)) !important;
 }
@@ -995,30 +1367,18 @@ html,
     backdrop-filter: blur(var(--blur)) !important;
 }
 
-/* ===================================== */
-/* Floating Glass Hamburger Drawer (Final) */
-/* ===================================== */
-
+/* Floating glass hamburger drawer — desktop */
 .layout-desktop .mainDrawer {
-
-    /* Glass фон */
     background: rgba(16,16,16,0.65) !important;
     backdrop-filter: blur(20px) saturate(140%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-
-    /* Floating позиция */
-    top: 90px !important;              /* отступ сверху */
-    bottom: 60px !important;           /* подрезаем снизу */
-    height: auto !important;           /* вместо calc */
-
-    /* Скругление */
+    top: 90px !important;
+    bottom: 60px !important;
+    height: auto !important;
     border-radius: 24px !important;
     overflow: hidden !important;
-
-    /* Эффект парения */
     box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
 }
-
 .layout-desktop .mainDrawer-scrollContainer {
     margin-top: 30px !important;
     margin-left: 15px !important;
@@ -1026,16 +1386,14 @@ html,
 
 /* Make watched icon dark and transparent */
 .playedIndicator {
-  background: #00000058 !important;
-  backdrop-filter: blur(6px) !important;
-  border-radius: 100px !important;
-
+    background: #00000058 !important;
+    backdrop-filter: blur(6px) !important;
+    border-radius: 100px !important;
 }
 
 /* Hide actors without photo */
-
 .personCard:has(.defaultCardBackground) {
-  display: none !important;
+    display: none !important;
 }
 
 /* Make collection/episode count badges dark and transparent */
@@ -1050,87 +1408,469 @@ html,
 .playstatebutton-icon-played {
     color: var(--primary-accent-color) !important;
 }
+
 /* Cards */
-
 .cardBox {
-  border-radius: 18px;
-  background-color: #1c1c1f;
-  box-shadow:
-    0 8px 24px rgba(0,0,0,0.4),
-    0 1px 0 rgba(255,255,255,0.05) inset;
+    border-radius: 18px;
+    background-color: #1c1c1f;
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.4),
+        0 1px 0 rgba(255,255,255,0.05) inset;
 }
 
-
-/* Hover only inside library grid */
-
+/* Hover animation inside library grid */
 .itemsContainer .cardBox {
-  transition:
-    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .itemsContainer .cardBox:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 18px 40px rgba(0,0,0,0.55),
-    0 2px 0 rgba(255,255,255,0.06) inset;
+    transform: translateY(-6px);
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.55),
+        0 2px 0 rgba(255,255,255,0.06) inset;
 }
 
-/* Restore Apple typography safely */
-
+/* Apple typography */
 .mainAnimatedPage,
 .skinHeader,
 .mainDrawer,
 .paperList,
 .dialog {
-  font-family: -apple-system, BlinkMacSystemFont,
-               "SF Pro Text", "SF Pro Display",
-               system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "SF Pro Text", "SF Pro Display",
+                 system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* убираю затемнение у задника фильма */
+/* Remove backdrop darkening */
 .backgroundContainer.withBackdrop {
     background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
-/* White filled progress in Continue Watching */
-.cardImageContainer 
-.innerCardFooter 
-.itemProgressBar 
-.itemProgressBarForeground {
-    background-color: rgba(255,255,255,0.9) !important;
-}
-
-/* Semi-transparent blue Play button */
-.layout-desktop .mainDetailButtons .btnPlay {
-    background: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6) !important;
-    color: #1c1c1e !important;
-}
-
-
-/* Hide ONLY play button on posters */
+/* Hide play button on posters */
 .cardOverlayFab-primary {
     display: none !important;
 }
 
-/* Mobile glass hamburger drawer */
+/* Floating glass hamburger drawer — mobile */
 .layout-mobile .mainDrawer {
-
     background: rgba(16,16,16,0.75) !important;
     backdrop-filter: blur(20px) saturate(140%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-
     border-radius: 20px !important;
-
     top: 70px !important;
     bottom: 30px !important;
     height: auto !important;
-
     box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
-}
-
-.layout-mobile .mainDrawer {
     width: 58% !important;
     max-width: 260px !important;
+}
+
+
+
+:root {
+    /* Обновляем базовый темный цвет для консистентности всей темы */
+    --darkerGradientPoint: #030507;
+}
+
+/* Применение вашего градиента к нужным контейнерам */
+html, 
+.backgroundContainer:not(.withBackdrop), 
+.backgroundContainer:not(.backgroundContainer-transparent), 
+.backdropContainer,
+.detailPageSecondaryContainer {
+    background-color: #030507 !important;
+    background: 
+        radial-gradient(ellipse at 20% 25%, #08132f 0%, transparent 80%),
+        radial-gradient(ellipse at 80% 20%, #070f22 0%, transparent 75%),
+        radial-gradient(ellipse at 50% 75%, #04091a 0%, transparent 85%),
+        radial-gradient(ellipse at 85% 75%, #06102a 0%, transparent 78%) !important;
+}
+
+
+
+
+/* Frosted glass card background under posters */
+.cardBox {
+    background: rgba(16, 16, 16, 0.6) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.45),
+        0 1px 0 rgba(255, 255, 255, 0.04) inset !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    outline: 1px solid rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Remove hover background on icon buttons, keep color only */
+@media (hover: hover) and (pointer: fine) {
+    .paper-icon-button-light:hover:not(:disabled) {
+        background-color: transparent !important;
+    }
+}
+
+/* Alphabet index sidebar */
+.alphaPickerButton {
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    transition: 0.15s !important;
+}
+.alphaPickerButton:hover {
+    color: var(--primary-accent-color) !important;
+    transform: scale(1.3) !important;
+}
+.alphaPickerButton.selectedAlpha {
+    color: var(--primary-accent-color) !important;
+}
+
+/* Hide top library buttons: Play All, Shuffle, Select View, Item Count */
+.btnPlayAll,
+.btnShuffle,
+.btnSelectView,
+.paging {
+    display: none !important;
+}
+
+/* Hide unused header buttons */
+.headerSyncButton,
+.headerCastButton {
+    display: none !important;
+}
+
+/* Place Sort and Filter as a pill next to search */
+.btnSort,
+.btnFilter-wrapper {
+    position: fixed !important;
+    top: 34px !important;
+    z-index: 1000 !important;
+    height: 45px !important;
+    display: flex !important;
+    align-items: center !important;
+    background: transparent !important;
+}
+.btnSort {
+    right: 172px !important;
+}
+.btnFilter-wrapper {
+    right: 124px !important;
+}
+
+/* Unified pill wrapper around all four */
+.btnSort,
+.btnFilter-wrapper,
+.headerRight {
+    background: transparent !important;
+}
+.headerRight {
+    background: var(--primary-background-transparent) !important;
+    padding: 0 5px !important;
+}
+
+.btnSort,
+.btnFilter-wrapper {
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    border-radius: 50px !important;
+}
+
+.sortFilterPill {
+    top: 34px !important;
+}
+
+//.pageTitle {
+//    display: none !important;
+//}
+
+.headerBackButton {
+    position: fixed !important;
+    top: 34px !important;
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    border-radius: 50px !important;
+    height: 45px !important;
+    width: 45px !important;
+}
+
+.headerBackButton:hover,
+.btnSort:hover {
+    background: var(--primary-background-transparent) !important;
+}
+
+.mainDrawerButton {
+    position: fixed !important;
+    top: 34px !important;
+    left: 60px !important;
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    border-radius: 50px !important;
+    height: 45px !important;
+    width: 45px !important;
+}
+
+.paper-icon-button-light.headerBackButton:hover:not(:disabled),
+.paper-icon-button-light.mainDrawerButton:hover:not(:disabled),
+.paper-icon-button-light.btnSort:hover:not(:disabled) {
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+}
+
+.pageTitle {
+    display: none !important;
+}
+
+.pageTitleWithLogo {
+    display: block !important;
+    position: fixed !important;
+    top: 34px !important;
+    left: 120px !important;
+}
+
+
+
+
+
+
+
+
+
+/* =========================================
+   ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+========================================= */
+:root {
+    --smallRadius: 0.5em;
+    --borderWidth: 0.06em;
+    --borderColor: hsl(214, 13%, 32%);
+    --defaultBorder: var(--borderWidth) solid var(--borderColor);
+    --lighterGradientPointAlpha: rgba(29, 38, 53, 0.85);
+    --textColor: rgb(209, 213, 219);
+    --dimTextColor: rgb(156, 163, 175);
+
+    --cardBg: rgba(16, 16, 16, 0.65);
+    --cardShadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --cardBorder: 1px solid rgba(255, 255, 255, 0.05);
+    --cardRadius: 20px;
+}
+
+/* =========================================
+   РОДИТЕЛЬСКАЯ СЕТКА
+========================================= */
+#itemDetailPage .detailSection {
+    display: grid;
+    row-gap: 1em;
+    column-gap: 3em;
+    max-width: unset !important;
+    grid-template-columns: 25% 1fr 1fr 1fr;
+    margin-bottom: 1.5em;
+}
+
+.detailPageContent {
+    gap: 1em;
+}
+
+/* =========================================
+   БЛОК: ВИДЕО, АУДИО И СУБТИТРЫ
+========================================= */
+.trackSelections {
+    order: 3;
+    max-width: unset !important;
+    margin-top: 1em;
+    grid-column: 3 / 5;
+
+    background: var(--cardBg) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    border: var(--cardBorder) !important;
+    border-radius: var(--cardRadius) !important;
+    box-shadow: var(--cardShadow) !important;
+    padding: 15px 20px !important;
+}
+
+.trackSelections .selectContainer {
+    max-width: unset !important;
+    align-items: baseline;
+}
+
+/* Внутренние кнопки-селекты */
+.trackSelections .selectContainer select.emby-select,
+.trackSelections .detailTrackSelect {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    border: none !important;
+    color: #fff !important;
+    padding: 10px 15px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.trackSelections .selectContainer select.emby-select:hover,
+.trackSelections .selectContainer select.emby-select:focus,
+.trackSelections .detailTrackSelect:hover,
+.trackSelections .detailTrackSelect:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    outline: none !important;
+}
+
+.trackSelectionFieldContainer > .selectArrowContainer {
+    top: 0.5em;
+}
+
+.trackSelectionFieldContainer > label {
+    max-width: 2.75em;
+    background-repeat: no-repeat;
+    color: transparent;
+    transform: scale(0.9);
+}
+
+/* =========================================
+   БЛОК: ДЕТАЛИ (Жанры, студия, режиссер)
+========================================= */
+.itemDetailsGroup {
+    outline: none;
+    overflow: hidden;
+    margin-top: 1em;
+    order: 2;
+    grid-column: 1 / 3;
+
+    background: var(--cardBg) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    border: var(--cardBorder) !important;
+    border-radius: var(--cardRadius) !important;
+    box-shadow: var(--cardShadow) !important;
+}
+
+/* Если нет блока дорожек — растягиваем на всю ширину */
+.nextUpSection.hide ~ #listChildrenCollapsible,
+.trackSelections.hide ~ .recordingFields.hide ~ .itemDetailsGroup {
+    grid-column: 1 / -1;
+}
+
+.detailsGroupItem {
+    margin: 0 !important;
+    justify-content: space-between;
+    padding: 0.5em 0.9em;
+    align-items: baseline;
+}
+
+/* Разделитель строк в тон обводке */
+.detailsGroupItem:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.detailsGroupItem > .label {
+    font-weight: 600;
+    flex-basis: 6em;
+    color: var(--textColor);
+}
+
+.detailsGroupItem > .content > a {
+    font-weight: 400;
+    text-align: end;
+}
+
+.detailsGroupItem > .content {
+    text-align: end;
+    color: var(--dimTextColor);
+}
+
+/* =========================================
+   ЛЕЙБЛЫ ВИДЕО / АУДИО / СУБТИТРЫ — сделать видимыми
+========================================= */
+
+/* Убираем прозрачность и делаем стиль как у "Жанры" / "Студия" */
+.trackSelections .selectLabel,
+.trackSelectionFieldContainer > label {
+    color: var(--textColor) !important;
+    font-weight: 600 !important;
+    font-size: 1em !important;
+    max-width: none !important;
+    transform: none !important;
+    background-image: none !important;
+    background-repeat: unset !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Кинопоиск (добавлено по аналогии, в оригинале отсутствовало) */
+.layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="kinopoisk.ru"]:hover,
+.itemExternalLinks.focuscontainer-x > a[href*="kinopoisk.ru"]:active {
+    background-color: rgb(255, 85, 0) !important; /* Оранжевый цвет Кинопоиска */
+    color: white !important;
+}
+
+/* Базовый вид кнопок внешних ссылок (одинаковый для всех) */
+.itemExternalLinks.focuscontainer-x > .button-link {
+    color: var(--textColor); /* Цвет текста */
+    background-color: rgba(16, 16, 16, 0.65) !important; /* Цвет фона (по умолчанию) */
+    padding: 0.125em 0.5em; /* Отступы внутри кнопки */
+    border-radius: var(--smallerRadius); /* Скругление углов */
+    margin-bottom: 0.5em; /* Отступ снизу */
+}
+
+
+
+
+/* Fix: full-width posters in collections */
+#listChildrenCollapsible {
+    grid-column: 1 / -1 !important;
+}
+
+/* Only narrow when nextUpSection is visible (TV series) */
+.nextUpSection:not(.hide) ~ #listChildrenCollapsible {
+    grid-column: 2 / -1 !important;
+}
+
+
+.trackSelections.hide ~ .recordingFields.hide ~ .itemDetailsGroup {
+    display: none;
+}
+
+
+/* вариант 2 — скрыть через уникальный alphaPicker который есть только на коллекциях */
+.alphaPicker-fixed ~ .padded-right-withalphapicker .btnFilter,
+.alphaPicker-fixed ~ .padded-right-withalphapicker .btnSort,
+.alphaPicker-fixed ~ .padded-right-withalphapicker .btnViewSettings {
+    display: none !important;
+}
+
+.mainDetailButtons {
+    justify-content: center !important;
+    padding-left: 4.5% !important;
+}
+
+
+/* "Ещё" raised-mini button — glass style like back/hamburger buttons */
+.emby-button.raised.raised-mini {
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    border: none !important;
+    border-radius: 50px !important;
+    color: var(--textColor) !important;
+    transition: color 0.2s !important;
+}
+
+.layout-desktop .emby-button.raised.raised-mini:hover {
+    background: var(--primary-background-transparent) !important;
+    color: var(--primary-accent-color) !important;
+}
+
+.emby-button.raised.raised-mini:active {
+    background: var(--primary-background-transparent) !important;
+    color: var(--primary-accent-color) !important;
+}
+
+
+#itemDetailPage:has(.detailImageContainer .person) .detailPagePrimaryContainer {
+    position: relative !important;
+}
+
+#itemDetailPage:has(.detailImageContainer .person) .mainDetailButtons {
+    position: absolute !important;
+    top: 15em !important;
+    left: 48% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    flex-direction: row !important;
 }
