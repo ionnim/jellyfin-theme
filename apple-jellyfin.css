@@ -1,4 +1,3 @@
-
 :root {
     --darkerGradientPoint: #111827;
     --darkerGradientPointAlpha: rgba(17, 24, 39, 0.85);
@@ -1476,8 +1475,7 @@ html,
 
 /* Применение вашего градиента к нужным контейнерам */
 html, 
-.backgroundContainer:not(.withBackdrop), 
-.backgroundContainer:not(.backgroundContainer-transparent), 
+.backgroundContainer:not(.withBackdrop):not(.backgroundContainer-transparent), 
 .backdropContainer,
 .detailPageSecondaryContainer {
     background-color: #030507 !important;
@@ -1868,7 +1866,7 @@ html,
 
 #itemDetailPage:has(.detailImageContainer .person) .mainDetailButtons {
     position: absolute !important;
-    top: 15em !important;
+    top: 85% !important;
     left: 48% !important;
     transform: translateX(-50%) !important;
     margin: 0 !important;
