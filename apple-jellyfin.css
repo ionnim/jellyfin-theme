@@ -1,5 +1,19 @@
+/* =========================================================
+   Apple Jellyfin — desktop-only guarded build v7
+   Applies only on desktop-class devices: mouse/trackpad + fine pointer.
+   Phones/tablets with touch-only pointer will keep the default Jellyfin UI.
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+/* =========================================================
+   Apple Jellyfin — desktop-only cleaned build
+   Target: Jellyfin Desktop 3.0.0 and modern desktop browsers
+   Mobile/TV-specific blocks removed. Repeated :root, repeated selectors and duplicate at-rules consolidated.
+========================================================= */
+
 :root {
-    --darkerGradientPoint: #111827;
+    --darkerGradientPoint: #030507;
     --darkerGradientPointAlpha: rgba(17, 24, 39, 0.85);
     --lighterGradientPoint: #1d2635;
     --lighterGradientPointAlpha: rgba(29, 38, 53, 0.85);
@@ -26,10 +40,31 @@
     --itemTitleVisibility: none;
     --appBarHeight: 5em;
     --backdropTrimFromTop: 10%;
+    --primary-r: 0;
+    --primary-g: 122;
+    --primary-b: 255;
+    --primary-accent-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 1.0);
+    --secondary-accent-color: #007aff20;
+    --primary-background-color: #101010;
+    --secondary-background-color: #181818;
+    --primary-background-transparent: rgba(35,35,35,0.5);
+    --secondary-background-transparent: rgba(0,0,0,0.6);
+    --tertiary-background-transparent: rgba(35,35,35,0.85);
+    --rounded-cards: 15px;
+    --blur: 10px;
+    --primary-alt1: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 1);
+    --primary-alt2: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.85);
+    --primary-alt3: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.7);
+    --primary-alt4: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.55);
+    --primary-alt5: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.4);
+    --cardBg: rgba(16, 16, 16, 0.65);
+    --cardShadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --cardBorder: 1px solid rgba(255, 255, 255, 0.05);
+    --cardRadius: 20px;
 }
 
 html {
-font-family: "Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 425;
     font-style: normal;
@@ -37,73 +72,62 @@ font-family: "Inter", sans-serif;
 }
 
 body {
---primaryItemPageNegativeSpace: 14vh;
+    --primaryItemPageNegativeSpace: 14vh;
     --secondaryItemPageNegativeSpace: 60vh;
     --clearLogoBottomSpace: 11em;
 }
 
 .detailPageWrapperContainer {
-padding-top: unset;
+    padding-top: unset;
     margin-top: unset;
 }
 
 .layout-desktop .detailPageWrapperContainer {
-background: transparent;
-    min-height: 46vh;
     background: linear-gradient(180deg, transparent, 17vh, var(--darkerGradientPointAlpha) 50vh);
+    min-height: 46vh;
 }
 
 .detailPagePrimaryContainer {
-align-content: space-between;
-    align-items: stretch;
+    align-content: space-between;
+    align-items: center;
     justify-content: end;
     flex-direction: column;
-    /* center content on desktop */
-    align-items: center;
-    /* this aligns the plot to left on 10.11.0 */
     text-align: left;
-    /* temporarily disabled for 10.11.0 */
-    /* margin-bottom: -1.5em; */
 }
 
 .layout-desktop .detailPagePrimaryContainer {
-background: transparent;
+    background: transparent;
 }
 
 .layout-desktop .detailPageSecondaryContainer {
-background-color: transparent;
+    background-color: transparent;
 }
 
 .detailPagePrimaryContainer>.detailPagePrimaryContent,
 [dir=ltr] .detailPagePrimaryContainer>.detailRibbon,
-/* this removes the extra large left padding on pre-10.11.0 */
+
 [dir=ltr] .detailPagePrimaryContainer.detailRibbon {
-padding-left: var(--sidePadding);
+    padding-left: var(--sidePadding);
 }
 
 .layout-desktop [dir="ltr"] .detailRibbon {
-flex-direction: column;
+    flex-direction: column;
 }
 
 .detailPagePrimaryContainer > .detailPagePrimaryContent {
-padding-top: 0;
+    padding-top: 0;
 }
 
 .detailPageSecondaryContainer {
-/* use !important for pre-10.11.0 compatibility */
     padding-top: 0 !important;
 }
 
 .skinHeader-withBackground:not(.semiTransparent) .headerHomeButton {
-display: none;
-}
-
-.pageTitle {
-height: 1.5em;
+    display: none;
 }
 
 .headerLeft .pageTitle {
-display: -webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -112,28 +136,27 @@ display: -webkit-box;
 #itemDetailPage .emby-scroller-container,
 #itemDetailPage .emby-scroller,
 #itemDetailPage .scrollX {
-margin: 0 calc(-1 * var(--sidePadding));
+    margin: 0 calc(-1 * var(--sidePadding));
     padding-left: calc(var(--sidePadding) - 0.375em);
-    /* mask-image: linear-gradient(90deg, transparent, white var(--sidePadding), white calc(100vw - var(--sidePadding)), transparent); */
 }
 
 .detailRibbon {
-background-color: transparent;
+    background-color: transparent;
 }
 
 .mediaInfoItem {
-border-radius: var(--smallRadius);
+    border-radius: var(--smallRadius);
     font-weight: 500;
     padding-top: 0;
     padding-bottom: 0;
 }
 
 .itemMiscInfo-primary {
-column-gap: 0.5em;
+    column-gap: 0.5em;
 }
 
 .mediaInfoOfficialRating {
-background: transparent !important;
+    background: transparent !important;
     font-size: 0.75em;
     font-family: "Noto Sans", sans-serif;
     line-height: 1.5em;
@@ -144,42 +167,42 @@ background: transparent !important;
 }
 
 [dir="ltr"] .mediaInfoCriticRating {
-background-size: 30%;
+    background-size: 30%;
     padding-left: 1.5em;
 }
 
 [dir="ltr"] .mediaInfoCriticRating::after {
-content: "%";
+    content: "%";
 }
 
 .detailRibbon:has(.portraitCard .folder) {
-min-height: 32vh;
+    min-height: 32vh;
     align-content: flex-end;
 }
 
 .layout-desktop .detailRibbon {
-height: 100%;
+    height: 100%;
     min-height: 25vh;
     margin-top: unset;
 }
 
 .itemBackdrop {
-display: block !important;
+    display: block !important;
 }
 
 .layout-desktop .itemBackdrop {
-height: calc(100vh - 27vh - var(--primaryItemPageNegativeSpace));
+    height: calc(100vh - 27vh - var(--primaryItemPageNegativeSpace));
 }
 
 #itemDetailPage:has(.subtitle) .itemBackdrop,
 #itemDetailPage:has(.detailImageContainer .backdropCard) .itemBackdrop,
 #itemDetailPage:has(.detailImageContainer .queue) .itemBackdrop,
 #itemDetailPage:has(.detailImageContainer .live_tv) .itemBackdrop {
-height: calc(100vh - 27vh - var(--secondaryItemPageNegativeSpace));
+    height: calc(100vh - 27vh - var(--secondaryItemPageNegativeSpace));
 }
 
 .detailLogo {
-display: var(--clearLogoVisibility);
+    display: var(--clearLogoVisibility);
     top: calc(100vh - var(--clearLogoBottomSpace) - var(--primaryItemPageNegativeSpace));
     left: 0;
     width: 40%;
@@ -190,11 +213,11 @@ display: var(--clearLogoVisibility);
 }
 
 #itemDetailPage:has(.subtitle) .detailLogo {
-top: calc(100vh - 6em - var(--secondaryItemPageNegativeSpace));
+    top: calc(100vh - 6em - var(--secondaryItemPageNegativeSpace));
 }
 
 .layout-desktop .detailImageContainer .card {
-position: relative !important;
+    position: relative !important;
     width: 22vh !important;
     float: none;
     left: 0 !important;
@@ -206,52 +229,51 @@ position: relative !important;
 }
 
 .detailImageContainer .card.backdropCard {
-width: 40vh !important;
+    width: 40vh !important;
     max-width: 50vw;
 }
 
 .detailImageContainer .card {
-display: none;
+    display: none;
 }
 
 .infoWrapper {
-align-content: end;
+    align-content: end;
     place-items: center;
     display: grid;
-    /* this centers the title and other text on 10.11.0 */
     text-align: center;
 }
 
 #itemDetailPage:has(.detailImageContainer .backdropCard) .detailLogo {
-z-index: 2;
+    z-index: 2;
     display: none;
 }
 
 .detailLogo:not(.hide) ~ .detailPageWrapperContainer .nameContainer h1 {
-z-index: 2;
+    z-index: 2;
     display: var(--itemTitleVisibility);
 }
 
 .detailLogo.hide ~ .detailPageWrapperContainer .nameContainer h1 {
-display: block !important;
+    display: block !important;
 }
 
 .detailImageContainer:has(.backdropCard, .squareCard) ~ .nameContainer h1 {
-display: block !important;
+    display: block !important;
 }
 
 .detailImageContainer > .backdropCard,
 .detailImageContainer > .squareCard,
 .detailImageContainer > .card:has(.live_tv) {
-display: block;
+    display: block;
 }
 
 #itemDetailPage:has(.subtitle) {
-background: linear-gradient(180deg, var(--darkerGradientPointAlpha) 80%, transparent);
+    background: linear-gradient(180deg, var(--darkerGradientPointAlpha) 80%, transparent);
 }
 
 .tagline {
-font-size: 1.3em;
+    font-size: 1.3em;
     font-weight: 400;
     margin: 0;
     font-style: italic;
@@ -260,17 +282,17 @@ font-size: 1.3em;
 
 html,
 .backdropContainer {
-background-color: var(--darkerGradientPoint);
+    background-color: var(--darkerGradientPoint);
     background: var(--backgroundGradient);
 }
 
 .backdropImage {
-background-position-y: clamp(0%, calc(var(--backdropTrimFromTop) * 5), 100%);
+    background-position-y: clamp(0%, calc(var(--backdropTrimFromTop) * 5), 100%);
 }
 
 .backdropImage:after,
 .backdropImage:before {
-content: "";
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -280,86 +302,73 @@ content: "";
 }
 
 .backdropImage:after {
-z-index: 0;
+    z-index: 0;
     height: 80vh;
     -webkit-mask: linear-gradient(180deg, rgba(0, 0, 0, 1) 75%, transparent);
     mask: linear-gradient(180deg, rgba(0, 0, 0, 1) 75%, transparent);
 }
 
 .layout-desktop .backdropImage:after {
-transition: opacity 0.25s;
+    transition: opacity 0.25s;
 }
 
 .backdropImage:before {
-transform: scale(1.1);
+    transform: scale(1.1);
     filter: var(--blurLargest);
 }
 
-.backgroundContainer.withBackdrop {
-opacity: 0.9;
-    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(17, 24, 39, 0.25));
-}
-
 .backdropImageFadeIn {
-transform-origin: bottom center;
+    transform-origin: bottom center;
     animation: animScaleUp 0.5s ease-out forwards;
 }
 
 .itemExternalLinks {
-color: var(--textColor);
+    color: var(--textColor);
 }
 
 .itemExternalLinks.focuscontainer-x {
-color: transparent;
-}
-
-.itemExternalLinks.focuscontainer-x > .button-link {
-color: var(--textColor);
-    background-color: var(--selectorBackgroundColor);
-    padding: 0.125em 0.5em;
-    border-radius: var(--smallerRadius);
-    margin-bottom: 0.5em;
+    color: transparent;
 }
 
 .layout-desktop .itemExternalLinks.focuscontainer-x > a:hover,
 .itemExternalLinks.focuscontainer-x > a:active {
-background-color: var(--activeColor) !important;
+    background-color: var(--activeColor) !important;
     color: white !important;
 }
 
 .layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="themoviedb.org"]:hover,
 .itemExternalLinks.focuscontainer-x > a[href*="themoviedb.org"]:active {
-background-color: rgb(26, 183, 216) !important;
+    background-color: rgb(26, 183, 216) !important;
     color: black !important;
 }
 
 .layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="imdb.com"]:hover,
 .itemExternalLinks.focuscontainer-x > a[href*="imdb.com"]:active {
-background-color: rgb(226, 182, 22) !important;
+    background-color: rgb(226, 182, 22) !important;
     color: black !important;
 }
 
 .layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="thetvdb.com"]:hover,
 .itemExternalLinks.focuscontainer-x > a[href*="thetvdb.com"]:active {
-background-color: rgb(108, 213, 145) !important;
+    background-color: rgb(108, 213, 145) !important;
     color: black !important;
 }
 
 .layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="trakt.tv"]:hover,
 .itemExternalLinks.focuscontainer-x > a[href*="trakt.tv"]:active {
-background-color: rgb(171, 58, 173) !important;
+    background-color: rgb(171, 58, 173) !important;
     color: var(--textColor) !important;
 }
 
 .overview-expand.emby-button {
-padding: 0;
+    padding: 0;
     margin-top: 1.4em;
     margin-bottom: 1.4em;
     color: transparent;
 }
 
 .overview-expand.emby-button:after {
-content: "";
+    content: "";
     font-family: "Material Icons";
     background: var(--selectorBackgroundColor);
     border-radius: 50%;
@@ -372,50 +381,45 @@ content: "";
 }
 
 .overview.detail-clamp-text ~ .overview-controls .overview-expand:after {
-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
 }
 
 .overview:not(.detail-clamp-text) ~ .overview-controls .overview-expand:after {
-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
 }
 
 .overview-controls {
-height: 0;
+    height: 0;
 }
 
 .detailSectionContent:has(.itemExternalLinks.hide) .overview-controls {
-height: 1em;
+    height: 1em;
 }
 
 #seriesAirTime {
-margin-top: 0.5em;
+    margin-top: 0.5em;
 }
 
 .itemMiscInfo {
-align-items: flex-end !important;
+    align-items: flex-end !important;
     justify-content: center;
 }
 
 .subtitleEditor-dropZone {
-border-radius: var(--largeRadius);
+    border-radius: var(--largeRadius);
 }
 
 .mainDetailButtons:has(.detailButton[data-type="Book"]) .btnPlay[title="Play"]:after {
-content: "Read";
+    content: "Read";
 }
 
 .mainDetailButtons:has(.detailButton[data-type="Book"]) .btnPlay .material-icons.play_arrow:before {
-content: "";
+    content: "";
     padding-inline-end: 1ch;
 }
 
-.mainDetailButtons {
-justify-content: center;
-    margin: 0;
-}
-
 .listItem-overview {
-display: -webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -423,114 +427,43 @@ display: -webkit-box;
 
 .listItem-bottomoverview,
 [dir="ltr"] .listItem:not(.actionSheetMenuItem)[data-type="Episode"] .listItem-overview p {
-margin-top: 0.75em;
+    margin-top: 0.75em;
     margin-bottom: 0em;
-}
-
-#itemDetailPage .detailSection {
-display: grid;
-    row-gap: 1em;
-    column-gap: 3em;
-    max-width: unset !important;
-    grid-template-columns: 25% 1fr 1fr 1fr;
-    margin-bottom: 1.5em;
-}
-
-.detailPageContent {
-gap: 1em;
-}
-
-.trackSelections {
-order: 3;
-    max-width: unset !important;
-    margin-top: 1em;
-    border: var(--defaultBorder);
-    border-radius: var(--smallRadius);
-    padding: 1em;
-    grid-column: 3 / 5;
-    background-color: var(--lighterGradientPointAlpha);
 }
 
 .detailsGroupItem,
 .trackSelections .selectContainer {
-max-width: unset !important;
+    max-width: unset !important;
     align-items: baseline;
 }
 
 .detailSectionContent a:not(.overview-expand) {
-text-align: start;
+    text-align: start;
 }
 
 .layout-desktop .detailSectionContent {
-display: grid;
+    display: grid;
     align-content: end;
     min-height: 16vh;
 }
 
 .detailSectionContent:has(.tagline.hide + .overview.hide) {
-min-height: unset;
-}
-
-.itemDetailsGroup {
-outline: none;
-    overflow: hidden;
-    margin-top: 1em;
-    border-radius: var(--smallRadius);
-    background-color: var(--lighterGradientPointAlpha);
-    border: none;
-    box-shadow: inset 0 0 0 0.06em var(--borderColor) !important;
-    order: 2;
-    grid-column: 1 / 3;
-}
-
-.detailsGroupItem {
-margin: 0 !important;
-    justify-content: space-between;
-    padding: 0.5em 0.9em;
-    align-items: baseline;
-}
-
-.detailsGroupItem:not(:last-child) {
-border-bottom: var(--defaultBorder);
-}
-
-.detailsGroupItem > .label {
-font-weight: 600;
-    flex-basis: 6em;
-}
-
-.detailsGroupItem > .content > a {
-font-weight: 400;
-    text-align: end;
-}
-
-.detailsGroupItem > .content {
-text-align: end;
-    color: var(--dimTextColor);
-}
-
-.detailsGroupItem > .label {
-color: var(--textColor);
+    min-height: unset;
 }
 
 .detailSection > .nextUpSection {
-order: 5;
+    order: 5;
     grid-column: 1;
 }
 
 .detailSection > #listChildrenCollapsible {
-order: 6;
+    order: 6;
     grid-column: 2 / -1;
 }
 
 .detailSectionContent {
-order: 1;
+    order: 1;
     grid-column: 1 / -1;
-}
-
-.nextUpSection.hide ~ #listChildrenCollapsible,
-.trackSelections.hide ~ .recordingFields.hide ~ .itemDetailsGroup {
-grid-column: 1 / -1;
 }
 
 .collectionItems {
@@ -545,66 +478,54 @@ grid-column: 1 / -1;
     padding-left: 0;
 }
 
-
 [dir="ltr"] .detailPageContent {
-padding-left: var(--sidePadding) !important;
+    padding-left: var(--sidePadding) !important;
     padding-right: var(--sidePadding) !important;
 }
 
 [dir="ltr"] .detailPageContent > .detailPagePrimaryContent {
-padding-left: 0 !important;
+    padding-left: 0 !important;
     padding-right: 0 !important;
 }
 
 #itemDetailPage .verticalSection .itemsContainer.padded-right {
-padding-right: 0 !important;
-}
-
-.upNextContainer {
-border-radius: var(--largeRadius);
-    color: var(--textColor);
+    padding-right: 0 !important;
 }
 
 [dir="ltr"] .upNextContainer {
-margin: 2em;
+    margin: 2em;
     box-sizing: border-box;
     max-width: 80vw;
 }
 
 .upNextContainer .btnStartNow {
-background-color: var(--btnSubmitColor);
+    background-color: var(--btnSubmitColor);
     border-color: var(--btnSubmitBorderColor);
 }
 
 .upNextDialog-title {
-white-space: pre-wrap;
+    white-space: pre-wrap;
     width: unset;
 }
 
 .upNextDialog-buttons {
-width: unset;
+    width: unset;
     flex-wrap: wrap;
 }
 
 .upNextContainer .upNextDialog-countdownText {
-color: white;
-}
-
-.upNextContainer {
-background: var(--headerColor) !important;
-    border: var(--defaultBorder) !important;
-    backdrop-filter: var(--blurDefault);
+    color: white;
 }
 
 .nameContainer > h3,
 .nameContainer > h1 {
-word-break: break-word;
+    word-break: break-word;
     overflow: hidden;
 }
 
 .nameContainer > h1.itemName,
 .nameContainer > h1.parentName {
-font-size: 4em;
+    font-size: 4em;
     white-space: pre-wrap;
     padding-bottom: 0.5ch;
     color: white;
@@ -614,14 +535,14 @@ font-size: 4em;
 .nameContainer > h1.parentName,
 .nameContainer > h1.itemName a,
 .nameContainer > h1.parentName a {
-font-weight: 200;
+    font-weight: 200;
 }
 
 .nameContainer > h1.itemName bdi,
 .nameContainer > h1.parentName bdi,
 .nameContainer > h1.itemName a,
 .nameContainer > h1.parentName a {
-overflow: hidden;
+    overflow: hidden;
     display: -webkit-box !important;
     -webkit-line-clamp: 3;
     line-clamp: 3;
@@ -629,73 +550,43 @@ overflow: hidden;
 }
 
 .subtitle {
-font-size: 2em;
+    font-size: 2em;
     padding-bottom: 1em;
 }
 
 .subtitleappearance-preview {
-border-radius: var(--smallRadius);
+    border-radius: var(--smallRadius);
 }
 
 .skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent.noHeaderRight {
-display: none;
+    display: none;
 }
 
 .skinHeader-withBackground.semiTransparent {
---headerBackground: none;
+    --headerBackground: none;
     backdrop-filter: none;
     background-color: transparent;
     border: none;
 }
 
 .skinHeader-withBackground.semiTransparent .headerButton {
-text-shadow: 1px 1px 0 #00000080;
+    text-shadow: 1px 1px 0 #00000080;
 }
 
-
-
-
-
-
-
-
-
-
-/* Variables */
-:root {
-    --primary-r: 0;
-    --primary-g: 122;
-    --primary-b: 255;
-    --primary-accent-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 1.0);
-    --secondary-accent-color: #007aff20;
-    --primary-background-color: #101010;
-    --secondary-background-color: #181818;
-    --primary-background-transparent: rgba(35,35,35,0.5);
-    --secondary-background-transparent: rgba(0,0,0,0.6);
-    --tertiary-background-transparent: rgba(35,35,35,0.85);
-    --rounded-cards: 15px;
-    --blur: 10px;
-
-    /* Alternate accents */
-    --primary-alt1: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 1);
-    --primary-alt2: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.85);
-    --primary-alt3: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.7);
-    --primary-alt4: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.55);
-    --primary-alt5: rgba(calc(var(--primary-r) - 30), calc(var(--primary-g) - 30), calc(var(--primary-b) - 30), 0.4);
-}
-
-/* Setting accent color variable */
 .emby-checkbox:checked + span + .checkboxOutline,
 .selectionCommandsPanel,
 progress[aria-valuenow]:before {
     background: var(--primary-accent-color) !important;
 }
+
 progress::-moz-progress-bar {
     background: var(--primary-accent-color) !important;
 }
+
 progress::-webkit-progress-value {
     background: var(--primary-accent-color) !important;
 }
+
 .emby-checkbox:checked + span + .checkboxOutline,
 .emby-checkbox:focus:not(:checked) + span + .checkboxOutline,
 .emby-input:focus,
@@ -708,6 +599,7 @@ progress::-webkit-progress-value {
 .progressring-spiner {
     border-color: var(--primary-accent-color) !important;
 }
+
 .page:not(.itemDetailPage) .button-link,
 .selectLabelFocused,
 .textareaLabelFocused,
@@ -720,68 +612,67 @@ progress::-webkit-progress-value {
 #divRunningTasks span {
     color: var(--primary-accent-color) !important;
 }
-@media (hover: hover) and (pointer: fine) {
-    .paper-icon-button-light:hover:not(:disabled) {
-        color: var(--primary-accent-color) !important;
-        background-color: var(--secondary-accent-color) !important;
-    }
+
+.defaultCardBackground1 {
+    background-color: var(--primary-alt1) !important;
 }
 
-/* Dynamic colors for default cards */
-.defaultCardBackground1 { background-color: var(--primary-alt1) !important; }
-.defaultCardBackground2 { background-color: var(--primary-alt2) !important; }
-.defaultCardBackground3 { background-color: var(--primary-alt3) !important; }
-.defaultCardBackground4 { background-color: var(--primary-alt4) !important; }
-.defaultCardBackground5 { background-color: var(--primary-alt5) !important; }
+.defaultCardBackground2 {
+    background-color: var(--primary-alt2) !important;
+}
 
+.defaultCardBackground3 {
+    background-color: var(--primary-alt3) !important;
+}
 
+.defaultCardBackground4 {
+    background-color: var(--primary-alt4) !important;
+}
 
-/* Increase size of Jellyfin logo */
+.defaultCardBackground5 {
+    background-color: var(--primary-alt5) !important;
+}
+
 .layout-desktop .pageTitleWithLogo {
     margin-left: 25px !important;
     height: 40px !important;
 }
 
-/* Fix for empty header with padding */
 [dir="ltr"] .pageTitle:not(.pageTitleWithLogo):empty {
     margin: 0 !important;
 }
 
-/* Fix for Jellyfin Media Player */
 .quickConnectSettingsContainer {
     margin-left: 250px !important;
 }
 
-/* Hide home button */
 .layout-desktop .headerHomeButton {
     display: none !important;
 }
 
-/* Fix for video player and login page */
 .layout-desktop .hide-scroll .mainDrawer,
 .layout-desktop .hideMainDrawer .mainDrawer {
     left: -320px !important;
 }
 
-/* Fix for collection items misalignment */
 .layout-desktop .collectionItems .collectionItemsContainer,
 .layout-desktop .collectionItems .sectionTitleContainer {
     padding-left: 0 !important;
 }
 
-/* Dynamic buttons */
 .layout-desktop .navMenuOption:hover:not(.navMenuOption-selected) {
     transform: scale(1.05) !important;
 }
+
 .layout-desktop .listItem {
     transition: 0.2s !important;
     border-radius: var(--rounded-cards) !important;
 }
+
 .layout-desktop #myPreferencesMenuPage .listItem:hover {
     transform: scale(1.015);
 }
 
-/* Rounded cards */
 .cardContent,
 .cardPadder,
 .cardOverlayContainer,
@@ -792,15 +683,14 @@ progress::-webkit-progress-value {
     border-radius: var(--rounded-cards) !important;
 }
 
-/* Rounded selection menu */
 .itemSelectionPanel {
     border: 2px solid var(--primary-accent-color) !important;
 }
+
 .itemSelectionPanel .checkboxOutline {
     margin: 7px !important;
 }
 
-/* Floating progress bar */
 .innerCardFooter {
     border-radius: var(--rounded-cards) !important;
     margin-left: 5px !important;
@@ -810,6 +700,7 @@ progress::-webkit-progress-value {
     background: rgba(0,0,0,0.5) !important;
     backdrop-filter: blur(var(--blur)) !important;
 }
+
 .fullInnerCardFooter {
     bottom: 5% !important;
     width: 90% !important;
@@ -818,23 +709,26 @@ progress::-webkit-progress-value {
     padding: 0 !important;
     backdrop-filter: none !important;
 }
+
 .itemProgressBar:not(.playbackProgress):not(.transcodingProgress):not(.backgroundProgress) {
     height: 10px !important;
     background: var(--primary-background-transparent) !important;
     backdrop-filter: blur(2px) !important;
     border-radius: 100px !important;
 }
+
 .innerCardFooterClear {
     background-color: transparent !important;
 }
+
 .innerCardFooter .cardText {
     padding: 0 0 0 10px !important;
 }
+
 .cardImageContainer .innerCardFooter .itemProgressBar .itemProgressBarForeground {
     background: var(--primary-accent-color) !important;
 }
 
-/* Rounded left drawer buttons */
 .navMenuOption,
 .navMenuOption:hover,
 .navMenuOption-selected {
@@ -846,11 +740,11 @@ progress::-webkit-progress-value {
     margin-top: 3px !important;
     margin-bottom: 3px !important;
 }
+
 .navMenuOption:hover:not(.navMenuOption-selected) {
     background-color: rgba(44, 44, 44, 0.7);
 }
 
-/* Center icons and text and shift to the left */
 .navMenuOptionIcon,
 .navMenuOptionText {
     position: inherit !important;
@@ -858,161 +752,76 @@ progress::-webkit-progress-value {
     margin-top: 0 !important;
 }
 
-/* Fix for header buttons */
 .layout-desktop .emby-button-foreground {
     top: -9px !important;
 }
-.layout-tv .emby-button-foreground {
-    top: -14px !important;
-}
 
-/* Custom button color */
 .navMenuOption-selected {
     background: var(--secondary-accent-color) !important;
     color: var(--primary-accent-color) !important;
 }
 
-/* Modified background color */
 html,
 .backgroundContainer:not(.withBackdrop):not(.backgroundContainer-transparent),
 .noBackdropTransparency .detailPageSecondaryContainer {
     background-color: var(--primary-background-color) !important;
 }
 
-/* Transparent header bar */
 .skinHeader {
     background-color: transparent !important;
 }
-.layout-desktop .skinHeader,
-.layout-tv .skinHeader {
-    padding-top: 1.5em !important;
-}
-.layout-tv .skinHeader {
-    padding-bottom: 10px !important;
-}
 
-/* Rounded header buttons */
 .headerTabs,
 .headerRight {
     background-color: var(--primary-background-transparent) !important;
     border-radius: 50px !important;
     backdrop-filter: blur(var(--blur)) !important;
 }
-.layout-desktop .headerTabs,
-.layout-tv .headerTabs {
-    margin-bottom: 10px !important;
-}
+
 .layout-desktop .headerTabs {
     margin-left: 160px !important;
     margin-top: -58px !important;
 }
 
-/* Button height */
 .headerRight,
 .emby-tab-button {
     height: 45px !important;
 }
 
-/* Padding for right header buttons */
 .layout-desktop .headerRight {
     padding: 0 5px !important;
 }
-.layout-tv .headerRight {
-    padding: 20px 10px !important;
-}
 
-/* Move left header back up */
-.layout-desktop .headerLeft,
-.layout-tv .headerLeft {
-    position: relative !important;
-    top: -17px !important;
-}
-
-/* Mobile fixes */
-.layout-mobile .sectionTabs {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: auto !important;
-    max-width: 100% !important;
-}
-.layout-mobile .emby-button-foreground {
-    top: -2px !important;
-}
-.layout-mobile .skinHeader {
-    transition: 0.1s !important;
-}
-.layout-mobile .mainDrawer-scrollContainer {
-    margin-top: 15px !important;
-}
-.layout-mobile .headroom--unpinned {
-    transform: none;
-}
-.layout-mobile .headroom--unpinned:has(.headerTabs.sectionTabs:not(.hide)) {
-    transform: translateY(-50%);
-}
-.layout-mobile .headroom--not-top {
-    background: var(--primary-background-transparent) !important;
-    backdrop-filter: blur(var(--blur)) !important;
-}
-.layout-mobile .headroom--not-top .headerRight {
-    background: none !important;
-}
-.layout-mobile .headroom--top,
-.layout-mobile .headroom--not-top:has(.headerTabs.sectionTabs:not(.hide)) {
-    background: transparent !important;
-    backdrop-filter: none !important;
-}
-.layout-mobile .headroom--top .headerRight,
-.layout-mobile .headroom--not-top:has(.headerTabs.sectionTabs:not(.hide)) .headerRight {
-    background: var(--primary-background-transparent) !important;
-}
-
-@media (max-width: 380px) {
-    .layout-mobile .pageTitle:not(.pageTitleWithLogo):not(:empty) {
-        position: absolute !important;
-        margin-left: 50% !important;
-        transform: translate(-50%, 0) !important;
-        top: 60px !important;
-    }
-    .layout-mobile .headerTop:has(.pageTitle:not(.pageTitleWithLogo):not(:empty)) {
-        -webkit-align-items: start !important;
-        align-items: start !important;
-    }
-    .layout-mobile .skinHeader:has(.pageTitle:not(.pageTitleWithLogo):not(:empty)) {
-        height: 110px !important;
-    }
-    .layout-mobile .skinHeader:has(.pageTitle:not(.pageTitleWithLogo):not(:empty)):has(.sectionTabs:not(.hide)) {
-        height: 140px !important;
-    }
-    .layout-mobile .libraryPage:not(.noSecondaryNavPage) {
-        padding-top: 9.5em !important;
-    }
-    .layout-mobile .headroom--unpinned:has(.headerTabs.sectionTabs:not(.hide)):has(.pageTitle:not(.pageTitleWithLogo):not(:empty)) {
-        transform: translateY(-60%);
-    }
-}
-
-/* Player modifications */
 .upNextContainer:not(#skipIntro),
 .toastVisible {
     backdrop-filter: blur(var(--blur)) !important;
 }
+
 .upNextContainer:not(#skipIntro) {
     border-radius: var(--rounded-cards) !important;
     background-color: rgba(0, 0, 0, 0.6) !important;
 }
+
 .upNextContainer {
+    border-radius: var(--largeRadius);
+    color: var(--textColor);
+    background: var(--headerColor) !important;
+    border: var(--defaultBorder) !important;
+    backdrop-filter: var(--blurDefault);
     margin: 4% !important;
 }
+
 .toastVisible {
     border-radius: 30px !important;
     background-color: var(--primary-background-transparent) !important;
 }
+
 .sliderBubble {
     border-radius: var(--rounded-cards) !important;
     background-color: var(--secondary-background-transparent) !important;
     backdrop-filter: blur(var(--blur)) !important;
 }
+
 .sliderBubble:not(.osdVolumeSliderContainer .sliderBubble):has(.chapterThumbContainer) {
     background-color: #ffffff00 !important;
     top: 25px !important;
@@ -1020,13 +829,14 @@ html,
 }
 
 @supports selector(div:not(.parent .child)) {
-    .mdl-slider-background-flex:not(.layout-mobile .nowPlayingBar .mdl-slider-background-flex) {
+    .mdl-slider-background-flex {
         height: 10px !important;
         margin-top: -5px !important;
         border-radius: 100px !important;
         background: hsla(0,0%,100%,.2) !important;
     }
 }
+
 @supports not selector(div:not(.parent .child)) {
     .mdl-slider-background-flex {
         height: 10px !important;
@@ -1041,25 +851,25 @@ html,
     background-color: var(--primary-accent-color) !important;
 }
 
-/* Moz */
 .mdl-slider::-moz-range-thumb {
     background: #ffffff00 !important;
     height: 10px !important;
     width: 8px !important;
     border-radius: 2px !important;
 }
+
 .mdl-slider-hoverthumb:hover::-moz-range-thumb {
     transform: scaleY(2);
     background: #fff !important;
 }
 
-/* Webkit */
 .mdl-slider::-webkit-slider-thumb {
     background: #ffffff00 !important;
     height: 10px !important;
     width: 8px !important;
     border-radius: 2px !important;
 }
+
 .mdl-slider-hoverthumb:hover::-webkit-slider-thumb {
     transform: scaleY(2);
     background: #fff !important;
@@ -1071,57 +881,64 @@ html,
     background: hsla(0,0%,100%,.2) !important;
     transform: translateX(-3px) !important;
 }
+
 .iconOsdProgressInner {
     background: var(--primary-accent-color) !important;
 }
 
-/* Up next card */
 .upNextDialog-buttons .upNextDialog-button {
     transition: 0.2s !important;
 }
+
 .upNextDialog-buttons .upNextDialog-button:hover {
     transform: scale(1.1);
 }
 
-/* Support for Jellyscrub plugin */
 .chapterThumbContainer {
     background: none !important;
     border-radius: var(--rounded-cards) !important;
     box-shadow: unset !important;
 }
+
 .chapterThumb {
     border-radius: var(--rounded-cards) !important;
     margin-bottom: 47px !important;
     box-shadow: 0 0 1.9vh #000 !important;
 }
+
 .chapterThumbTextContainer {
     background: none !important;
 }
+
 .chapterThumbText {
     text-align: center !important;
 }
+
 .chapterThumbText-dim {
     display: none !important;
 }
 
-/* Support for IntroSkipper plugin */
 #skipIntro .btnSkipIntro {
     transition: 0.2s;
     border-radius: 100px !important;
     backdrop-filter: blur(var(--blur)) !important;
 }
+
 #skipIntro .btnSkipIntro:hover {
     transition: 0.2s;
     transform: scale(1.05);
     background: var(--primary-accent-color) !important;
 }
+
 #skipIntro .paper-icon-button-light:hover:not(:disabled) {
     color: #FFF !important;
 }
+
 .sliderContainer:has(.mdl-slider-hoverthumb:not(:hover)) .sliderMarker {
     opacity: 0 !important;
     transition: 0.2s !important;
 }
+
 .sliderContainer:has(.mdl-slider-hoverthumb:hover) .sliderMarker {
     opacity: 1 !important;
     transition: 0.2s !important;
@@ -1129,50 +946,64 @@ html,
     transform: translate3d(0,40%,0) !important;
     -webkit-transform: translate3d(0,40%,0) !important;
 }
+
 .sliderMarker.watched {
     background-color: #FFFFFF90 !important;
     z-index: 10 !important;
 }
+
 #skipIntro .upNextContainer {
     padding: 0 !important;
 }
+
 #skipIntro .emby-button {
     background: rgba(30, 30, 30, 0.7) !important;
 }
+
 #skipIntro .emby-button:hover {
     box-shadow: 0 0 8px rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.6) !important;
 }
+
 #skipIntro .emby-button:focus {
     background: rgba(30, 30, 30, 0.7) !important;
     box-shadow: unset !important;
 }
 
-/* Support for InPlayerEpisodePreview plugin */
 .layout-desktop #popupFocusContainer {
     padding: 10px !important;
 }
+
 .layout-desktop #popupTitleContainer {
     margin: 0 !important;
     padding: 10px 0 !important;
 }
+
 .layout-desktop #popupContentContainer .previewEpisodeDetails {
     position: unset !important;
     margin: 0 0 6px 10px !important;
     font-size: 13.5px !important;
 }
+
 .layout-desktop #popupContentContainer .previewEpisodeTitle {
     font-size: 16.5px !important;
 }
+
 .layout-desktop #popupContentContainer .listItem {
     padding: .25em .25em .25em .5em !important;
 }
 
-/* Modify player buttons */
-.material-icons.fast_rewind::before { content: "\e059"; }
-.material-icons.fast_forward::before { content: "\e057"; }
-.material-icons.audiotrack::before  { content: "\e91f"; }
+.material-icons.fast_rewind::before {
+    content: "";
+}
 
-/* Settings modifications */
+.material-icons.fast_forward::before {
+    content: "";
+}
+
+.material-icons.audiotrack::before {
+    content: "";
+}
+
 .emby-input,
 .emby-textarea,
 .paperList,
@@ -1180,50 +1011,43 @@ html,
 .subtitleappearance-preview {
     border-radius: var(--rounded-cards) !important;
 }
+
 .button-submit,
 .emby-select,
 .checkboxOutline,
 .emby-button.raised {
     border-radius: 100px !important;
 }
+
 .button-submit {
     background: var(--primary-accent-color) !important;
 }
 
-/* Modify username placement on profile page */
 .layout-desktop #userProfilePage .readOnlyContent div:not([class]), div[class=""] {
     align-items: initial !important;
 }
+
 .layout-desktop .username {
     margin: 0 0 10px 10px !important;
 }
 
-/* Remove border under certain dashboard items */
 .listItem-border {
     border: 0 !important;
 }
 
-/* Add padding to list items */
-.layout-desktop .listItem,
-.layout-tv .listItem {
-    padding-inline: 15px !important;
-}
-
-/* Center the Quick Connect page */
 .layout-desktop #quickConnectPreferencesPage form {
     margin: auto;
 }
 
-/* Theme icons for certain list objects */
 .listItemIcon:not(.listItemIcon-transparent):not(.notification_important) {
     background: var(--secondary-accent-color) !important;
     color: var(--primary-accent-color) !important;
 }
 
-/* Modify play button */
 .layout-desktop .mainDetailButtons .btnPlay::after {
     content: "Play" !important;
 }
+
 .layout-desktop .mainDetailButtons .btnPlay {
     position: relative !important;
     margin-right: -85px !important;
@@ -1233,81 +1057,81 @@ html,
     border-radius: 100px !important;
     color: #1c1c1e !important;
 }
+
 .layout-desktop .mainDetailButtons .detailButton {
     -webkit-flex-direction: row !important;
     flex-direction: row !important;
 }
 
-/* Change crop for list item images */
 .listItemImage {
     background-size: contain !important;
     border-radius: var(--rounded-cards);
 }
 
-/* Move up content if no backdrop image is present */
 @supports selector(:has(*)) {
     .layout-desktop:not(:has(.backdropContainer .backdropImage)) #itemBackdrop {
         height: 90px !important;
     }
+
     .layout-desktop:not(:has(.backdropContainer .backdropImage)) .mainDetailButtons {
         margin-top: 200px !important;
     }
 }
 
-/* Display size scaling */
 @media (width: 1600px) {
     .layout-desktop .headerRight {
         margin-bottom: 0 !important;
     }
+
     .layout-desktop .emby-button-foreground {
         top: -4px !important;
     }
 }
+
 @media (max-width: 1599px) {
     .layout-desktop .pageTitleWithLogo {
         margin-left: 25px !important;
     }
+
     .layout-desktop .headerTabs {
         margin-top: -65px !important;
     }
+
     .layout-desktop .headerRight {
         margin-right: 15px !important;
     }
+
     .layout-desktop .sectionTabs {
         width: auto !important;
         align-self: center !important;
     }
+
     .layout-desktop .emby-button-foreground {
         top: -2px !important;
     }
 }
 
-/* Fixes for TV layout */
-.layout-tv .sectionTabs {
-    width: auto !important;
-}
-.layout-tv .headerLeft {
-    padding: 5px !important;
-}
-
-/* Login page */
 .layout-desktop #loginPage {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .layout-desktop #loginPage .padded-left.padded-right.padded-bottom-page.margin-auto-y {
     background: var(--secondary-background-color) !important;
     width: 450px !important;
     border-radius: 25px !important;
     padding: 3em !important;
 }
+
 .layout-desktop #loginPage .readOnlyContent {
     position: relative !important;
 }
+
 .layout-desktop #loginPage .btnForgotPassword {
     transition: none !important;
 }
+
 .layout-desktop #loginPage .readOnlyContent:has(.btnManual.hide) .btnForgotPassword {
     background: none !important;
     font-weight: normal !important;
@@ -1320,53 +1144,55 @@ html,
     z-index: 1 !important;
     transition: none !important;
 }
+
 .layout-desktop #loginPage .squareCard {
     width: 25% !important;
     font-size: smaller !important;
 }
+
 .layout-desktop #loginPage .squareCard .cardBox {
     margin-inline: 0.6em !important;
 }
+
 @media (max-width: 100em) {
     .layout-desktop #loginPage .squareCard {
         width: 20% !important;
     }
+
     .layout-desktop #loginPage .padded-left.padded-right.padded-bottom-page.margin-auto-y {
         width: 600px !important;
     }
+
     .layout-desktop #loginPage .readOnlyContent:has(.btnManual.hide) .btnForgotPassword {
         margin-left: 470px !important;
     }
 }
 
-/* Dialog box */
 .dialog {
     background-color: var(--secondary-background-color) !important;
 }
+
 .actionSheetTitle {
     margin: 10px 20px !important;
 }
 
-/* Dynamic backdrop support */
-
-/* Transparent drawer */
 .layout-desktop .backgroundContainer.withBackdrop + div .mainDrawer {
     background: linear-gradient(to right, #10101090, transparent) !important;
 }
+
 .layout-desktop:has(#itemDetailPage.noBackdropTransparency) .mainDrawer {
     background: var(--secondary-background-color) !important;
 }
 
-/* Blur nav buttons with backdrop */
 .layout-desktop:has(.backgroundContainer.withBackdrop) .navMenuOption-selected {
     backdrop-filter: blur(var(--blur)) !important;
 }
+
 .layout-desktop:has(.backgroundContainer.withBackdrop) .navMenuOption:hover:not(.navMenuOption-selected) {
     background: var(--primary-background-transparent) !important;
     backdrop-filter: blur(var(--blur)) !important;
 }
 
-/* Floating glass hamburger drawer — desktop */
 .layout-desktop .mainDrawer {
     background: rgba(16,16,16,0.65) !important;
     backdrop-filter: blur(20px) saturate(140%) !important;
@@ -1378,24 +1204,22 @@ html,
     overflow: hidden !important;
     box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
 }
+
 .layout-desktop .mainDrawer-scrollContainer {
     margin-top: 30px !important;
     margin-left: 15px !important;
 }
 
-/* Make watched icon dark and transparent */
 .playedIndicator {
     background: #00000058 !important;
     backdrop-filter: blur(6px) !important;
     border-radius: 100px !important;
 }
 
-/* Hide actors without photo */
 .personCard:has(.defaultCardBackground) {
     display: none !important;
 }
 
-/* Make collection/episode count badges dark and transparent */
 .countIndicator,
 .cardOverlayCount,
 .listItem-indexNumber {
@@ -1408,29 +1232,17 @@ html,
     color: var(--primary-accent-color) !important;
 }
 
-/* Cards */
-.cardBox {
-    border-radius: 18px;
-    background-color: #1c1c1f;
-    box-shadow:
-        0 8px 24px rgba(0,0,0,0.4),
-        0 1px 0 rgba(255,255,255,0.05) inset;
-}
-
-/* Hover animation inside library grid */
 .itemsContainer .cardBox {
-    transition:
-        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .itemsContainer .cardBox:hover {
     transform: translateY(-6px);
-    box-shadow:
-        0 18px 40px rgba(0,0,0,0.55),
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55),
         0 2px 0 rgba(255,255,255,0.06) inset;
 }
 
-/* Apple typography */
 .mainAnimatedPage,
 .skinHeader,
 .mainDrawer,
@@ -1442,101 +1254,91 @@ html,
     -webkit-font-smoothing: antialiased;
 }
 
-/* Remove backdrop darkening */
 .backgroundContainer.withBackdrop {
+    opacity: 0.9;
+    background: linear-gradient(0deg, var(--darkerGradientPoint), 45%, rgba(17, 24, 39, 0.25));
     background-color: rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Hide play button on posters */
 .cardOverlayFab-primary {
     display: none !important;
 }
 
-/* Floating glass hamburger drawer — mobile */
-.layout-mobile .mainDrawer {
-    background: rgba(16,16,16,0.75) !important;
-    backdrop-filter: blur(20px) saturate(140%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-    border-radius: 20px !important;
-    top: 70px !important;
-    bottom: 30px !important;
-    height: auto !important;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
-    width: 58% !important;
-    max-width: 260px !important;
-}
-
-
-
-:root {
-    /* Обновляем базовый темный цвет для консистентности всей темы */
-    --darkerGradientPoint: #030507;
-}
-
-/* Применение вашего градиента к нужным контейнерам */
 html, 
 .backgroundContainer:not(.withBackdrop):not(.backgroundContainer-transparent), 
 .backdropContainer,
 .detailPageSecondaryContainer {
     background-color: #030507 !important;
-    background: 
-        radial-gradient(ellipse at 20% 25%, #08132f 0%, transparent 80%),
+    background: radial-gradient(ellipse at 20% 25%, #08132f 0%, transparent 80%),
         radial-gradient(ellipse at 80% 20%, #070f22 0%, transparent 75%),
         radial-gradient(ellipse at 50% 75%, #04091a 0%, transparent 85%),
         radial-gradient(ellipse at 85% 75%, #06102a 0%, transparent 78%) !important;
 }
 
-
-
-
-/* Frosted glass card background under posters */
 .cardBox {
+    border-radius: 18px;
+    background-color: #1c1c1f;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45),
+        0 1px 0 rgba(255, 255, 255, 0.04) inset !important;
     background: rgba(16, 16, 16, 0.6) !important;
     backdrop-filter: blur(20px) saturate(140%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-    box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.45),
-        0 1px 0 rgba(255, 255, 255, 0.04) inset !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     outline: 1px solid rgba(0, 0, 0, 0.35) !important;
 }
 
-/* Remove hover background on icon buttons, keep color only */
 @media (hover: hover) and (pointer: fine) {
     .paper-icon-button-light:hover:not(:disabled) {
+        color: var(--primary-accent-color) !important;
         background-color: transparent !important;
     }
 }
 
-/* Alphabet index sidebar */
 .alphaPickerButton {
     font-size: 20px !important;
     font-weight: 500 !important;
     transition: 0.15s !important;
 }
+
 .alphaPickerButton:hover {
     color: var(--primary-accent-color) !important;
     transform: scale(1.3) !important;
 }
+
 .alphaPickerButton.selectedAlpha {
     color: var(--primary-accent-color) !important;
 }
 
-/* Hide top library buttons: Play All, Shuffle, Select View, Item Count */
 .btnPlayAll,
 .btnShuffle,
-.btnSelectView,
-.paging {
+.btnSelectView {
     display: none !important;
 }
 
-/* Hide unused header buttons */
 .headerSyncButton,
 .headerCastButton {
     display: none !important;
 }
 
-/* Place Sort and Filter as a pill next to search */
+.btnSort {
+    right: 172px !important;
+}
+
+.btnFilter-wrapper {
+    right: 124px !important;
+}
+
+.btnSort,
+.btnFilter-wrapper,
+.headerRight {
+    background: transparent !important;
+}
+
+.headerRight {
+    background: var(--primary-background-transparent) !important;
+    padding: 0 5px !important;
+}
+
 .btnSort,
 .btnFilter-wrapper {
     position: fixed !important;
@@ -1545,28 +1347,6 @@ html,
     height: 45px !important;
     display: flex !important;
     align-items: center !important;
-    background: transparent !important;
-}
-.btnSort {
-    right: 172px !important;
-}
-.btnFilter-wrapper {
-    right: 124px !important;
-}
-
-/* Unified pill wrapper around all four */
-.btnSort,
-.btnFilter-wrapper,
-.headerRight {
-    background: transparent !important;
-}
-.headerRight {
-    background: var(--primary-background-transparent) !important;
-    padding: 0 5px !important;
-}
-
-.btnSort,
-.btnFilter-wrapper {
     background: var(--primary-background-transparent) !important;
     backdrop-filter: blur(var(--blur)) !important;
     border-radius: 50px !important;
@@ -1575,10 +1355,6 @@ html,
 .sortFilterPill {
     top: 34px !important;
 }
-
-//.pageTitle {
-//    display: none !important;
-//}
 
 .headerBackButton {
     position: fixed !important;
@@ -1614,6 +1390,7 @@ html,
 }
 
 .pageTitle {
+    height: 1.5em;
     display: none !important;
 }
 
@@ -1624,35 +1401,6 @@ html,
     left: 120px !important;
 }
 
-
-
-
-
-
-
-
-
-/* =========================================
-   ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
-========================================= */
-:root {
-    --smallRadius: 0.5em;
-    --borderWidth: 0.06em;
-    --borderColor: hsl(214, 13%, 32%);
-    --defaultBorder: var(--borderWidth) solid var(--borderColor);
-    --lighterGradientPointAlpha: rgba(29, 38, 53, 0.85);
-    --textColor: rgb(209, 213, 219);
-    --dimTextColor: rgb(156, 163, 175);
-
-    --cardBg: rgba(16, 16, 16, 0.65);
-    --cardShadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    --cardBorder: 1px solid rgba(255, 255, 255, 0.05);
-    --cardRadius: 20px;
-}
-
-/* =========================================
-   РОДИТЕЛЬСКАЯ СЕТКА
-========================================= */
 #itemDetailPage .detailSection {
     display: grid;
     row-gap: 1em;
@@ -1666,22 +1414,19 @@ html,
     gap: 1em;
 }
 
-/* =========================================
-   БЛОК: ВИДЕО, АУДИО И СУБТИТРЫ
-========================================= */
 .trackSelections {
     order: 3;
     max-width: unset !important;
     margin-top: 1em;
+    border: var(--cardBorder) !important;
+    border-radius: var(--cardRadius) !important;
+    padding: 15px 20px !important;
     grid-column: 3 / 5;
-
+    background-color: var(--lighterGradientPointAlpha);
     background: var(--cardBg) !important;
     backdrop-filter: blur(20px) saturate(140%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-    border: var(--cardBorder) !important;
-    border-radius: var(--cardRadius) !important;
     box-shadow: var(--cardShadow) !important;
-    padding: 15px 20px !important;
 }
 
 .trackSelections .selectContainer {
@@ -1689,7 +1434,6 @@ html,
     align-items: baseline;
 }
 
-/* Внутренние кнопки-селекты */
 .trackSelections .selectContainer select.emby-select,
 .trackSelections .detailTrackSelect {
     background: rgba(255, 255, 255, 0.1) !important;
@@ -1720,25 +1464,21 @@ html,
     transform: scale(0.9);
 }
 
-/* =========================================
-   БЛОК: ДЕТАЛИ (Жанры, студия, режиссер)
-========================================= */
 .itemDetailsGroup {
     outline: none;
     overflow: hidden;
     margin-top: 1em;
+    border-radius: var(--cardRadius) !important;
+    background-color: var(--lighterGradientPointAlpha);
+    border: var(--cardBorder) !important;
+    box-shadow: var(--cardShadow) !important;
     order: 2;
     grid-column: 1 / 3;
-
     background: var(--cardBg) !important;
     backdrop-filter: blur(20px) saturate(140%) !important;
     -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
-    border: var(--cardBorder) !important;
-    border-radius: var(--cardRadius) !important;
-    box-shadow: var(--cardShadow) !important;
 }
 
-/* Если нет блока дорожек — растягиваем на всю ширину */
 .nextUpSection.hide ~ #listChildrenCollapsible,
 .trackSelections.hide ~ .recordingFields.hide ~ .itemDetailsGroup {
     grid-column: 1 / -1;
@@ -1751,7 +1491,6 @@ html,
     align-items: baseline;
 }
 
-/* Разделитель строк в тон обводке */
 .detailsGroupItem:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
@@ -1772,11 +1511,6 @@ html,
     color: var(--dimTextColor);
 }
 
-/* =========================================
-   ЛЕЙБЛЫ ВИДЕО / АУДИО / СУБТИТРЫ — сделать видимыми
-========================================= */
-
-/* Убираем прозрачность и делаем стиль как у "Жанры" / "Студия" */
 .trackSelections .selectLabel,
 .trackSelectionFieldContainer > label {
     color: var(--textColor) !important;
@@ -1791,55 +1525,39 @@ html,
     display: block !important;
 }
 
-/* Кинопоиск (добавлено по аналогии, в оригинале отсутствовало) */
 .layout-desktop .itemExternalLinks.focuscontainer-x > a[href*="kinopoisk.ru"]:hover,
 .itemExternalLinks.focuscontainer-x > a[href*="kinopoisk.ru"]:active {
-    background-color: rgb(255, 85, 0) !important; /* Оранжевый цвет Кинопоиска */
+    background-color: rgb(255, 85, 0) !important;
     color: white !important;
 }
 
-/* Базовый вид кнопок внешних ссылок (одинаковый для всех) */
 .itemExternalLinks.focuscontainer-x > .button-link {
-    color: var(--textColor); /* Цвет текста */
-    background-color: rgba(16, 16, 16, 0.65) !important; /* Цвет фона (по умолчанию) */
-    padding: 0.125em 0.5em; /* Отступы внутри кнопки */
-    border-radius: var(--smallerRadius); /* Скругление углов */
-    margin-bottom: 0.5em; /* Отступ снизу */
+    color: var(--textColor);
+    background-color: rgba(16, 16, 16, 0.65) !important;
+    padding: 0.125em 0.5em;
+    border-radius: var(--smallerRadius);
+    margin-bottom: 0.5em;
 }
 
-
-
-
-/* Fix: full-width posters in collections */
 #listChildrenCollapsible {
     grid-column: 1 / -1 !important;
 }
 
-/* Only narrow when nextUpSection is visible (TV series) */
 .nextUpSection:not(.hide) ~ #listChildrenCollapsible {
     grid-column: 2 / -1 !important;
 }
-
 
 .trackSelections.hide ~ .recordingFields.hide ~ .itemDetailsGroup {
     display: none;
 }
 
 
-/* вариант 2 — скрыть через уникальный alphaPicker который есть только на коллекциях */
-.alphaPicker-fixed ~ .padded-right-withalphapicker .btnFilter,
-.alphaPicker-fixed ~ .padded-right-withalphapicker .btnSort,
-.alphaPicker-fixed ~ .padded-right-withalphapicker .btnViewSettings {
-    display: none !important;
-}
-
 .mainDetailButtons {
     justify-content: center !important;
+    margin: 0;
     padding-left: 4.5% !important;
 }
 
-
-/* "Ещё" raised-mini button — glass style like back/hamburger buttons */
 .emby-button.raised.raised-mini {
     background: var(--primary-background-transparent) !important;
     backdrop-filter: blur(var(--blur)) !important;
@@ -1859,7 +1577,6 @@ html,
     color: var(--primary-accent-color) !important;
 }
 
-
 #itemDetailPage:has(.detailImageContainer .person) .detailPagePrimaryContainer {
     position: relative !important;
 }
@@ -1871,4 +1588,338 @@ html,
     transform: translateX(-50%) !important;
     margin: 0 !important;
     flex-direction: row !important;
+}
+
+.paging {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    height: auto !important;
+    min-height: 2.5em !important;
+    max-height: none !important;
+    overflow: visible !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.75em !important;
+    margin-top: 1.25em !important;
+    margin-bottom: 1.25em !important;
+    padding: 0.5em 0 !important;
+}
+
+.paging button,
+.paging .emby-button,
+.paging .paper-icon-button-light {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.paging span,
+.paging div,
+.paging label {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+button.btnNewCollection.autoSize.paper-icon-button-light,
+button.btnNewCollection.paper-icon-button-light,
+.btnNewCollection.autoSize.paper-icon-button-light,
+.btnNewCollection.paper-icon-button-light {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+button.btnPlay.button-flat.listTextButton-autohide.emby-button,
+.btnPlay.button-flat.listTextButton-autohide.emby-button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* =========================================================
+   DESKTOP CLEAN v2 — restored lost desktop button/header fixes
+   Этот блок должен оставаться в самом конце файла.
+========================================================= */
+
+/* 1) В прошлой очистке потерялись desktop-части из смешанных
+   .layout-desktop / .layout-tv правил. Возвращаем только desktop. */
+.layout-desktop .skinHeader {
+    padding-top: 1.5em !important;
+}
+
+.layout-desktop .headerTabs {
+    margin-bottom: 10px !important;
+}
+
+.layout-desktop .headerLeft {
+    position: relative !important;
+    top: -17px !important;
+}
+
+.layout-desktop .listItem {
+    padding-inline: 15px !important;
+}
+
+/* 2) Возвращаем старый рабочий фикс скрытия лишних кнопок
+   Sort / Filter / View Settings в контексте alphaPicker. */
+.alphaPicker-fixed ~ .padded-right-withalphapicker .btnFilter,
+.alphaPicker-fixed ~ .padded-right-withalphapicker .btnSort,
+.alphaPicker-fixed ~ .padded-right-withalphapicker .btnViewSettings {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* 3) Закрепляем уже найденные рабочие фиксы в конце файла,
+   чтобы они не перебивались более ранними правилами. */
+.btnPlayAll,
+.btnShuffle,
+.btnSelectView,
+.headerSyncButton,
+.headerCastButton,
+.layout-desktop .headerHomeButton,
+.cardOverlayFab-primary {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.paging {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+button.btnNewCollection.autoSize.paper-icon-button-light,
+button.btnNewCollection.paper-icon-button-light,
+.btnNewCollection.autoSize.paper-icon-button-light,
+.btnNewCollection.paper-icon-button-light,
+button.btnPlay.button-flat.listTextButton-autohide.emby-button,
+.btnPlay.button-flat.listTextButton-autohide.emby-button {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* =========================================================
+   DESKTOP CLEAN v3 — Телегид из ElegantFin в цветах Apple Jellyfin
+   Взята структура оформления Guide/Program Guide, но цвета заменены
+   на переменные текущей темы.
+========================================================= */
+
+/* Контейнер телегида на страницах Live TV / Каналы */
+.layout-desktop .programGuideSection {
+    grid-column: 1 / -1 !important;
+    order: -1 !important;
+    margin-top: 2em !important;
+    padding: 0.5em !important;
+    background: var(--cardBg) !important;
+    backdrop-filter: blur(20px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+    border: var(--cardBorder) !important;
+    border-radius: var(--cardRadius) !important;
+    box-shadow: var(--cardShadow) !important;
+}
+
+.layout-desktop .programGuide {
+    padding-right: var(--sidePadding) !important;
+}
+
+/* Отступ от верхней панели, чтобы телегид не залезал под fixed-кнопки */
+.layout-desktop #guideTab {
+    padding-top: 3em !important;
+}
+
+/* Верхние даты телегида */
+.layout-desktop .guide-date-tab-button {
+    color: var(--dimTextColor) !important;
+    border-radius: 50px !important;
+    transition: color 0.15s ease, background-color 0.15s ease !important;
+}
+
+.layout-desktop .guide-date-tab-button.emby-tab-button-active,
+.layout-desktop .guide-date-tab-button:focus,
+.layout-desktop .guide-date-tab-button:hover {
+    color: var(--textColor) !important;
+    background: var(--secondary-accent-color) !important;
+}
+
+/* Основная сетка программ: убираем цветовые заливки Jellyfin и делаем чистую glass-сетку */
+.layout-desktop .channelPrograms,
+.layout-desktop .programCell {
+    border-color: transparent !important;
+    background-color: transparent !important;
+    border-radius: var(--smallRadius) !important;
+    height: 4.42em !important;
+}
+
+.layout-desktop .guideVerticalScroller {
+    padding: 0 !important;
+}
+
+/* Карточка передачи внутри ячейки */
+.layout-desktop .guideProgramName {
+    height: calc(100% - 0.7em) !important;
+    margin: 0.35em 0 0.35em 0.7em !important;
+    padding: 0 0.75em !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    color: var(--textColor) !important;
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    -webkit-backdrop-filter: blur(var(--blur)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--smallerRadius) !important;
+}
+
+.layout-desktop .guideProgramName > * {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+/* Убираем маленький треугольник/каретку, как в ElegantFin */
+.layout-desktop .guide-programNameCaret {
+    display: none !important;
+}
+
+/* Текущая активная передача */
+.layout-desktop .programCell-active .guideProgramName {
+    background: var(--secondary-accent-color) !important;
+    border-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.45) !important;
+    color: var(--textColor) !important;
+}
+
+/* Левый блок канала */
+.layout-desktop .guide-channelHeaderCell {
+    width: auto !important;
+    height: calc(4.42em - 0.7em) !important;
+    margin: 0.35em 0.7em 0.7em 0.7em !important;
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    -webkit-backdrop-filter: blur(var(--blur)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: var(--smallRadius) !important;
+    color: var(--textColor) !important;
+}
+
+.layout-desktop .guideChannelImage {
+    background-position: center !important;
+    background-size: contain !important;
+}
+
+.layout-desktop .guideChannelNumber {
+    font-size: 1em !important;
+    color: var(--dimTextColor) !important;
+}
+
+/* Фокус/hover — в акцентном цвете текущей темы */
+.layout-desktop .guide-channelHeaderCell:focus,
+.layout-desktop .guide-channelHeaderCell:hover,
+.layout-desktop .programCell:focus > .guideProgramName,
+.layout-desktop .programCell:hover > .guideProgramName {
+    background: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.28) !important;
+    border-color: rgba(var(--primary-r), var(--primary-g), var(--primary-b), 0.65) !important;
+    color: var(--textColor) !important;
+}
+
+.layout-desktop .programCell:focus {
+    background-color: transparent !important;
+}
+
+/* Кнопки выбора/фильтра в телегиде */
+.layout-desktop #guideTab .emby-select-iconbutton,
+.layout-desktop .programGuideSection .emby-select-iconbutton {
+    background: var(--primary-background-transparent) !important;
+    backdrop-filter: blur(var(--blur)) !important;
+    -webkit-backdrop-filter: blur(var(--blur)) !important;
+    border: var(--defaultLighterBorder) !important;
+    border-radius: var(--smallRadius) !important;
+    color: var(--textColor) !important;
+    margin-inline-start: 1em !important;
+}
+
+.layout-desktop #guideTab .emby-select-iconbutton:hover,
+.layout-desktop .programGuideSection .emby-select-iconbutton:hover {
+    color: var(--primary-accent-color) !important;
+    background: var(--primary-background-transparent) !important;
+}
+
+
+/* =========================================================
+   DESKTOP CLEAN v6 — safe header overflow fix
+   Исправляет визуальное срезание кнопок верхней панели в компактном окне,
+   не меняя размеры кнопок, top-offset, z-index и геометрию headerRight/userButton.
+========================================================= */
+
+/* Разрешаем содержимому верхней панели выходить за внутренние flex-контейнеры,
+   чтобы меню, назад, вкладки, поиск и аватар не срезались снизу при масштабировании окна. */
+.layout-desktop .skinHeader,
+.layout-desktop .headerTop,
+.layout-desktop .headerLeft,
+.layout-desktop .headerRight,
+.layout-desktop .headerTabs,
+.layout-desktop .sectionTabs {
+    overflow: visible !important;
+}
+
+/* Даём самой верхней панели стабильную высоту под 45px-кнопки и текущие отступы темы.
+   В отличие от прошлой версии, не трогаем .headerTop, не двигаем .headerLeft и не меняем размер кнопок. */
+.layout-desktop .skinHeader {
+    min-height: 84px !important;
+}
+
+/* То же самое точечно для внутренних элементов верхней панели: вкладки, поиск, аватар,
+   меню, назад, сортировка/фильтр. Размеры не задаём, чтобы userButton не становился огромным. */
+.layout-desktop .headerButton,
+.layout-desktop .headerButtonLeft,
+.layout-desktop .headerButtonRight,
+.layout-desktop .mainDrawerButton,
+.layout-desktop .headerBackButton,
+.layout-desktop .headerSearchButton,
+.layout-desktop .headerUserButton,
+.layout-desktop .btnSort,
+.layout-desktop .btnFilter-wrapper,
+.layout-desktop .emby-tab-button,
+.layout-desktop .paper-icon-button-light {
+    overflow: visible !important;
+}
+
+/* Защита от невидимой области headerTop: сама зона панели не должна перехватывать клики,
+   но реальные кнопки и вкладки остаются кликабельными. */
+.layout-desktop .skinHeader,
+.layout-desktop .headerTop {
+    pointer-events: none !important;
+}
+
+.layout-desktop .headerLeft,
+.layout-desktop .headerRight,
+.layout-desktop .headerTabs,
+.layout-desktop .sectionTabs,
+.layout-desktop .headerButton,
+.layout-desktop .headerButtonLeft,
+.layout-desktop .headerButtonRight,
+.layout-desktop .mainDrawerButton,
+.layout-desktop .headerBackButton,
+.layout-desktop .headerSearchButton,
+.layout-desktop .headerUserButton,
+.layout-desktop .btnSort,
+.layout-desktop .btnFilter-wrapper,
+.layout-desktop .emby-tab-button,
+.layout-desktop .paper-icon-button-light {
+    pointer-events: auto !important;
+}
+
+
 }
