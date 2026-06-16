@@ -1920,6 +1920,146 @@ button.btnPlay.button-flat.listTextButton-autohide.emby-button,
 .layout-desktop .paper-icon-button-light {
     pointer-events: auto !important;
 }
+/* =========================================
+   Fix Sort / Filter vertical alignment
+   Опускаем кнопки сортировки и фильтра на одну линию с поиском и профилем
+========================================= */
+
+/* =========================================
+   Stable desktop header controls
+   Фиксирует верхние кнопки по Y при изменении масштаба
+========================================= */
+
+@media (hover: hover) and (pointer: fine) {
+    :root {
+        /* Главная вертикальная позиция верхних круглых кнопок */
+        --jf-header-buttons-top: 28px;
+
+        /* Вертикальная позиция вкладок: Фильмы / Рекомендации / Избранное / Коллекции / Жанры */
+        --jf-section-tabs-top: 28px;
+    }
+
+    /* Убираем старые вертикальные сдвиги, которые могут плавать при масштабировании */
+    .layout-desktop .headerLeft,
+    .layout-desktop .headerTop,
+    .layout-desktop .headerTabs,
+    .layout-desktop .sectionTabs,
+    .layout-desktop .headerRight,
+    .layout-desktop .btnSort,
+    .layout-desktop .btnFilter-wrapper,
+    .layout-desktop .headerBackButton,
+    .layout-desktop .mainDrawerButton {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Назад */
+    .layout-desktop .headerBackButton {
+        position: fixed !important;
+        top: var(--jf-header-buttons-top) !important;
+        transform: none !important;
+    }
+
+    /* Меню */
+    .layout-desktop .mainDrawerButton {
+        position: fixed !important;
+        top: var(--jf-header-buttons-top) !important;
+        transform: none !important;
+    }
+
+    /* Сортировка */
+    .layout-desktop .btnSort {
+        position: fixed !important;
+        top: var(--jf-header-buttons-top) !important;
+        transform: none !important;
+    }
+
+    /* Фильтр */
+    .layout-desktop .btnFilter-wrapper {
+        position: fixed !important;
+        top: var(--jf-header-buttons-top) !important;
+        transform: none !important;
+    }
+
+    /* Правая капсула: поиск + пользователь */
+    .layout-desktop .headerRight {
+        position: fixed !important;
+        top: var(--jf-header-buttons-top) !important;
+        right: 35px !important;
+        transform: none !important;
+    }
+
+    /* Центральные вкладки библиотеки */
+    .layout-desktop .headerTabs.sectionTabs {
+        position: fixed !important;
+        top: var(--jf-section-tabs-top) !important;
+        left: 50% !important;
+        margin-left: 0 !important;
+        transform: translateX(-50%) !important;
+    }
+}
+
+/* =========================================
+   Stable Sort / Filter position - fixed
+   Двигаем только sort и wrapper фильтра.
+   Внутреннюю кнопку фильтра не позиционируем.
+========================================= */
+
+@media (hover: hover) and (pointer: fine) {
+    :root {
+        /* Общая высота кнопок сортировки и фильтра */
+        --jf-sort-filter-top: 28px;
+
+        /*
+           Горизонтальная позиция.
+           Больше значение = левее.
+           Меньше значение = правее.
+        */
+        --jf-filter-right: 147px;
+        --jf-sort-right: 195px;
+    }
+
+    /* Сортировка */
+    .layout-desktop button.btnSort,
+    .layout-desktop .btnSort {
+        position: fixed !important;
+        top: var(--jf-sort-filter-top) !important;
+        right: var(--jf-sort-right) !important;
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        z-index: 1200 !important;
+    }
+
+    /* Двигаем только wrapper фильтра */
+    .layout-desktop .btnFilter-wrapper {
+        position: fixed !important;
+        top: var(--jf-sort-filter-top) !important;
+        right: var(--jf-filter-right) !important;
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        z-index: 1200 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 45px !important;
+        height: 45px !important;
+        overflow: visible !important;
+    }
+
+    /* Внутреннюю кнопку фильтра НЕ двигаем */
+    .layout-desktop .btnFilter-wrapper .btnFilter,
+    .layout-desktop button.btnFilter {
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        left: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        margin: 0 !important;
+    }
+}
 
 
 }
